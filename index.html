@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Léo Tech Catalogue</title>
+<style>
+/* Layout idea: quiet white page, one big headline, soft grey product tiles in a grid,
+   a selection bar that stays at the bottom once the customer has picked something. */
+:root{
+  color-scheme: light;
+  --page:#ffffff;
+  --tile:#f4f4f6;
+  --ink:#1c1c1f;
+  --muted:#6c6c73;
+  --line:#dedee3;
+  --accent:#0a66d8;
+  --accent-ink:#ffffff;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.brand{font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:-.01em}
+.langs{display:flex;gap:2px;background:var(--tile);border-radius:999px;padding:3px}
+.langs button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted)}
+.langs button[aria-pressed="true"]{background:var(--page);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+/* hero */
+.hero{text-align:center;padding:56px 0 28px}
+.hero h1{font-family:var(--font-display);font-size:clamp(34px,6.4vw,60px);line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0 0 14px;text-wrap:balance}
+.hero p{font-size:clamp(17px,2.4vw,22px);color:var(--muted);max-width:34em;margin:0 auto;text-wrap:balance}
+
+/* category tabs */
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:8px 0 28px}
+.tabs button{border:1px solid var(--line);background:var(--page);border-radius:999px;padding:8px 18px;font-size:15px}
+.tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--page)}
+
+/* product grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{background:var(--tile);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.photo{aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:var(--page);display:grid;place-items:center;position:relative}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo svg{width:46%;height:46%;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tag{position:absolute;left:12px;top:12px;background:var(--ink);color:var(--page);font-size:12px;padding:3px 10px;border-radius:999px}
+.card h2{font-family:var(--font-display);font-size:22px;line-height:1.15;letter-spacing:-.015em;font-weight:600;margin:0}
+.desc{color:var(--muted);font-size:15px;margin:0}
+.price{font-size:15px;font-variant-numeric:tabular-nums}
+.opt{display:flex;flex-direction:column;gap:7px}
+.opt span{font-size:13px;color:var(--muted)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chips button{border:1.5px solid var(--line);background:var(--page);border-radius:10px;padding:7px 12px;font-size:14px}
+.chips button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.add{margin-top:auto;border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:11px 20px;font-size:15px;font-weight:500;align-self:flex-start}
+.add:hover{filter:brightness(1.08)}
+
+.lock{display:inline-flex;align-items:center;gap:10px;border:0;background:none;padding:0;font-size:14px;color:var(--muted);text-align:left}
+.lock .blur{font-size:17px;font-weight:600;color:var(--ink);filter:blur(6px);user-select:none;-webkit-user-select:none;letter-spacing:.04em}
+.lock:hover .lk{text-decoration:underline;color:var(--accent)}
+.d-price .lock .blur{font-size:24px}
+.acct{border:1px solid var(--line);background:var(--page);border-radius:999px;padding:6px 14px;font-size:13px}
+.acct.on{background:var(--ink);border-color:var(--ink);color:var(--page)}
+.bar-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#mdlg{width:min(420px,calc(100% - 24px))}
+#mdlg form{display:flex;flex-direction:column;gap:14px}
+#mdlg label{font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+#mdlg input{font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--page);color:var(--ink);}
+#mdlg input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.m-go{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:12px 20px;font-size:16px;font-weight:500}
+.m-err{color:#b3261e;font-size:14px;margin:0}
+.m-join{font-size:14px;color:var(--muted);margin:0}
+.card-actions{margin-top:auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.card-actions .add{margin-top:0}
+.more{border:0;background:none;color:var(--accent);font-size:15px;padding:6px 0}
+.more:hover{text-decoration:underline}
+
+/* product detail */
+dialog{border:0;border-radius:24px;padding:0;width:min(760px,calc(100% - 24px));max-height:calc(100% - 24px);background:var(--page);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.d-in{padding:26px 24px 28px;display:flex;flex-direction:column;gap:22px}
+.d-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.d-top h2{font-family:var(--font-display);font-size:clamp(26px,5vw,36px);line-height:1.08;letter-spacing:-.02em;font-weight:600;margin:0;text-wrap:balance}
+.d-close{border:0;background:var(--tile);border-radius:50%;width:36px;height:36px;font-size:18px;flex-shrink:0;line-height:1}
+.d-lead{font-size:19px;color:var(--muted);margin:0;max-width:34em}
+.d-price{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:-8px}
+.card .price{font-size:17px;font-weight:600}
+.d-photo{border-radius:18px;overflow:hidden;background:var(--tile);aspect-ratio:4/3}
+.d-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 75%}
+.d-video{border-radius:18px;overflow:hidden;background:#000;aspect-ratio:880/488}
+.d-video video{width:100%;height:100%;display:block}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.gal img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;background:var(--tile)}
+.gal button{border:0;padding:0;background:none;border-radius:14px;cursor:zoom-in;display:block}
+#zoom{background:transparent;box-shadow:none;width:100%;max-width:100%;height:100%;max-height:100%;border-radius:0;margin:0}
+#zoom::backdrop{background:rgba(0,0,0,.88)}
+.z-in{position:relative;width:100%;height:100%;display:grid;place-items:center;padding:56px 12px}
+.z-in img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px}
+.z-btn{position:absolute;border:0;border-radius:50%;width:44px;height:44px;background:rgba(255,255,255,.92);color:#1c1c1f;font-size:22px;line-height:1}
+.z-close{top:10px;right:12px}.z-prev{left:12px;top:50%;margin-top:-22px}.z-next{right:12px;top:50%;margin-top:-22px}
+.z-count{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:14px;font-variant-numeric:tabular-nums}
+.d-h{font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.01em;margin:0 0 10px}
+.combos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.combo{background:var(--tile);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.combo b{font-size:15px;font-weight:600}
+.combo small{color:var(--muted);font-size:13px}
+.plug{display:flex;align-items:center;gap:6px;color:var(--muted)}
+.plug i{display:block;height:12px;border-radius:3px;background:var(--ink)}
+.plug i.a{width:22px}.plug i.c{width:16px;border-radius:6px}.plug i.l{width:13px;border-radius:5px}
+.plug span{flex:1;height:2px;background:var(--line)}
+.points{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 22px}
+.points b{display:block;font-size:16px}
+.points span{color:var(--muted);font-size:15px}
+.specs{width:100%;border-collapse:collapse;font-size:15px}
+.specs th,.specs td{text-align:left;padding:9px 0;border-top:1px solid var(--line);vertical-align:top}
+.specs th{font-weight:400;color:var(--muted);width:38%;padding-right:12px}
+.d-fine{font-size:12.5px;color:var(--muted);margin:0}
+
+/* how to order + footer */
+.how{margin:56px 0 0;background:var(--tile);border-radius:22px;padding:30px 24px;text-align:center}
+.how h2{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px}
+.how p{color:var(--muted);margin:0 auto;max-width:36em}
+.how .tel{display:inline-block;margin-top:14px;font-size:24px;font-weight:600;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+footer{color:var(--muted);font-size:12.5px;text-align:center;padding:28px 0 8px;max-width:46em;margin:0 auto}
+
+/* selection bar */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.tray .wrap{padding-top:10px;padding-bottom:12px}
+.tray-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tray-head strong{font-size:15px}
+.tray-actions{display:flex;gap:8px;flex-wrap:wrap}
+.tray-actions button,.tray-actions a{text-decoration:none;color:inherit;border:1px solid var(--line);background:var(--page);border-radius:999px;padding:8px 16px;font-size:14px}
+.tray-actions .primary{background:var(--ink);border-color:var(--ink);color:var(--page)}
+.tray-actions button:disabled{opacity:.4;cursor:default}
+.tray-actions .primary:disabled{opacity:.6}
+.list{list-style:none;margin:10px 0 0;padding:0;max-height:34vh;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.list li{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;background:var(--tile);border-radius:10px;padding:8px 12px}
+.list small{color:var(--muted);display:block}
+.qty input{width:58px;font:inherit;text-align:center;padding:4px 2px;border:1px solid var(--line);border-radius:8px;background:var(--page);color:var(--ink)}
+.tot{display:flex;justify-content:space-between;font-weight:600;font-size:16px;padding:8px 12px 0;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:8px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--page);line-height:1;font-size:16px;padding:0}
+.note{font-size:13px;color:var(--muted);margin:8px 0 0}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand" id="brand"></div>
+    <div class="bar-right">
+    <button type="button" class="acct" id="acct"></button>
+    <div class="langs" role="group" aria-label="Langue / Language / 语言">
+      <button type="button" data-lang="fr">Français</button>
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1 id="heroTitle"></h1>
+    <p id="heroText"></p>
+  </section>
+
+  <nav class="tabs" id="tabs" aria-label="Catégories"></nav>
+  <section class="grid" id="grid"></section>
+
+  <section class="how">
+    <h2 id="howTitle"></h2>
+    <p id="howText"></p>
+    <a class="tel" id="tel"></a>
+  </section>
+
+  <footer id="foot"></footer>
+</main>
+
+<dialog id="dlg" aria-labelledby="dTitle"><div class="d-in" id="dBody"></div></dialog>
+<dialog id="mdlg" aria-labelledby="mTitle"><div class="d-in">
+  <div class="d-top"><h2 id="mTitle" style="font-size:26px"></h2><button type="button" class="d-close" id="mClose" aria-label="Fermer">×</button></div>
+  <p class="d-lead" id="mText" style="font-size:16px"></p>
+  <form id="mForm">
+    <label for="mCode"><span id="mLabel"></span><input id="mCode" type="text" inputmode="tel" autocomplete="off" spellcheck="false"></label>
+    <p class="m-err" id="mErr" hidden></p>
+    <button type="submit" class="m-go" id="mGo"></button>
+  </form>
+  <p class="m-join" id="mJoin"></p>
+</div></dialog>
+
+<dialog id="zoom" aria-label="Photo"><div class="z-in" id="zIn">
+  <img id="zImg" alt="">
+  <button type="button" class="z-btn z-close" id="zClose" aria-label="Fermer">×</button>
+  <button type="button" class="z-btn z-prev" id="zPrev" aria-label="Précédente">‹</button>
+  <button type="button" class="z-btn z-next" id="zNext" aria-label="Suivante">›</button>
+  <div class="z-count" id="zCount"></div>
+</div></dialog>
+
+<aside class="tray" aria-live="polite">
+  <div class="wrap">
+    <div class="tray-head">
+      <strong id="trayTitle"></strong>
+      <div class="tray-actions">
+        <button type="button" id="toggle"></button>
+        <button type="button" id="clear"></button>
+        <button type="button" id="copy"></button>
+        <button type="button" class="primary" id="sendAuto" hidden></button>
+        <a class="primary" id="sendMail" hidden></a>
+      </div>
+    </div>
+    <ul class="list" id="list" hidden></ul>
+    <div class="tot" id="tot" hidden></div>
+    <p class="note" id="note" hidden></p>
+  </div>
+</aside>
+
+<script>
+/* =====================================================================
+   SHOP SETTINGS — the only part you need to change later.
+   ===================================================================== */
+var SHOP = {
+  name:  "Léo Tech",
+  phone: "672-866-6615",
+  email: "lucratetrading@gmail.com",  /* orders sent by email arrive here */
+  formKey: "3081c239-5bb7-4a6b-bf55-286832747c48"                         /* Web3Forms access key. When filled in, orders are emailed automatically. */
+};
+
+/* PRODUCTS — one block per product.
+   cat: "ear" (earphones) | "cable" | "charger"
+   img: file inside the img folder, or "" to show a drawing until a photo is ready
+   sample: true  -> shows an "Example" label (remove once the product is real)
+   Prices are NOT written here. They are stored locked (encrypted) in LOCKED below
+   and only appear after a store logs in with its username and password. */
+var PRODUCTS = [
+  { id:"ear-a", cat:"ear", img:"img/ecouteurs-lightning-a.jpg", price:"",
+    name:{fr:"Écouteurs filaires Lightning", en:"Lightning wired earphones", zh:"Lightning 有线耳机"},
+    desc:{fr:"Micro et télécommande sur le fil. Se branche directement sur le port Lightning.", en:"In-line mic and remote. Plugs straight into a Lightning port.", zh:"带线控和麦克风，直接插 Lightning 接口。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
+  { id:"ear-b", cat:"ear", img:"img/ecouteurs-lightning-b.jpg", price:"",
+    name:{fr:"Écouteurs filaires Lightning, en boîtier", en:"Lightning wired earphones, boxed", zh:"Lightning 有线耳机（盒装）"},
+    desc:{fr:"Présentés dans un boîtier de rangement. Micro et télécommande sur le fil.", en:"Packed in a storage tray. In-line mic and remote.", zh:"带收纳托盘包装，线控加麦克风。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
+  { id:"ear-c", cat:"ear", img:"img/ecouteurs-sans-fil.jpg", price:"",
+    name:{fr:"Écouteurs sans fil Bluetooth", en:"Bluetooth wireless earbuds", zh:"蓝牙无线耳机"},
+    desc:{fr:"Intra-auriculaires avec embouts en silicone et boîtier de recharge.", en:"In-ear buds with silicone tips and a charging case.", zh:"入耳式，带硅胶耳塞和充电盒。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
+  { id:"cable-4in1", cat:"cable", img:"img/cable-4-en-1-g5.jpg",
+    name:{fr:"Câble de recharge 4 en 1", en:"4 in One Charging Cable", zh:"四合一充电线"},
+    desc:{fr:"Un câble, quatre branchements. USB-A ou USB-C d'un côté, USB-C ou Lightning de l'autre. Jusqu'à 65 W.", en:"One cable, four ways to plug in. USB-A or USB-C on one end, USB-C or Lightning on the other. Up to 65 W.", zh:"一条线，四种接法。一头 USB-A 或 USB-C，另一头 USB-C 或 Lightning，最高 65 W。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Noir et jaune",en:"Black and yellow",zh:"黑黄色"}]} ],
+    detail:{
+      video:"img/cable-4-en-1.mp4", poster:"img/cable-4-en-1-poster.jpg",
+      gallery:["img/cable-4-en-1-g5.jpg","img/cable-4-en-1-g1.jpg","img/cable-4-en-1.jpg","img/cable-4-en-1-g2.jpg","img/cable-4-en-1-g3.jpg","img/cable-4-en-1-g4.jpg","img/cable-4-en-1-g6.jpg"],
+      lead:{fr:"Rabattez l'embout jaune pour changer de connecteur. Le même câble recharge le téléphone, la tablette et le portable.", en:"Flip the yellow tip to change connector. The same cable charges your phone, tablet and laptop.", zh:"翻一下黄色接头就能换接口。手机、平板、笔记本，一条线都能充。"},
+      combos:[
+        {a:"a",b:"c",t:"USB-A → USB-C",   n:{fr:"Chargeur ou prise USB classique",en:"Classic USB charger or port",zh:"接普通 USB 充电头或电脑"}},
+        {a:"c",b:"c",t:"USB-C → USB-C",   n:{fr:"Recharge rapide, jusqu'à 65 W",en:"Fast charging, up to 65 W",zh:"快充，最高 65 W"}},
+        {a:"c",b:"l",t:"USB-C → Lightning",n:{fr:"Recharge rapide PD, jusqu'à 27 W",en:"PD fast charging, up to 27 W",zh:"PD 快充，最高 27 W"}},
+        {a:"a",b:"l",t:"USB-A → Lightning",n:{fr:"Chargeur ou prise USB classique",en:"Classic USB charger or port",zh:"接普通 USB 充电头或电脑"}}
+      ],
+      points:[
+        {h:{fr:"Plat et tressé",en:"Flat and braided",zh:"扁平编织线身"}, p:{fr:"Gaine en nylon tressé, souple, qui s'emmêle moins qu'un câble rond.",en:"Braided nylon jacket, flexible, and tangles less than a round cable.",zh:"尼龙编织外皮，柔软，比圆线更不容易打结。"}},
+        {h:{fr:"Recharge et données",en:"Charging and data",zh:"充电加传输"}, p:{fr:"Transfert de photos et de fichiers jusqu'à 480 Mb/s.",en:"Moves photos and files at up to 480 Mbps.",zh:"传照片和文件，速度最高 480 Mbps。"}},
+        {h:{fr:"Facile à ranger",en:"Easy to pack",zh:"好收纳"}, p:{fr:"Attache auto-agrippante incluse pour l'enrouler proprement.",en:"Hook-and-loop strap included to keep it coiled.",zh:"自带魔术贴绑带，卷起来不散。"}}
+      ],
+      specs:[
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"0,9 m (3 pi)",en:"0.9 m (3 ft)",zh:"0.9 米（3 英尺）"}],
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-A et USB-C d'un côté, USB-C et Lightning de l'autre",en:"USB-A and USB-C on one end, USB-C and Lightning on the other",zh:"一头 USB-A 加 USB-C，另一头 USB-C 加 Lightning"}],
+        [{fr:"Puissance maximale",en:"Maximum power",zh:"最大功率"}, {fr:"65 W (USB-C vers USB-C), 27 W (vers Lightning)",en:"65 W (USB-C to USB-C), 27 W (to Lightning)",zh:"65 W（USB-C 对 USB-C），27 W（接 Lightning）"}],
+        [{fr:"Transfert de données",en:"Data transfer",zh:"数据传输"}, {fr:"Jusqu'à 480 Mb/s",en:"Up to 480 Mbps",zh:"最高 480 Mbps"}],
+        [{fr:"Matériau",en:"Material",zh:"材质"}, {fr:"Nylon tressé, âme en cuivre étamé",en:"Braided nylon, tinned copper core",zh:"尼龙编织，镀锡铜芯"}],
+        [{fr:"Compatible avec",en:"Works with",zh:"适用设备"}, {fr:"Téléphones, tablettes et portables à port USB-C ou Lightning",en:"Phones, tablets and laptops with a USB-C or Lightning port",zh:"带 USB-C 或 Lightning 接口的手机、平板、笔记本"}]
+      ],
+      fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"Actual charging speed depends on your device and charger.",zh:"实际充电速度取决于你的设备和充电头。"}
+    } },
+];
+
+/* Member logins and prices, locked. Do not edit by hand. */
+var LOCKED = {"p":{"i":"hBYfZFiUpAbtWOfJ","c":"TTywunkH0PrGjE01k8WMLNS8t5oUbdff1gLfBPNFZeaL8vdV"},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"4cd5b27069d7d14c","i":"zqzpgZ50SQUVm4oF","c":"w7zyQlGe3exihYcTewvgPK2dPBCvbemEiLuIbvn29aWVJtkyPvQt/z4wLHjCmBzr1w6M2DFZjGT3I5V1I1zM4RiS9xqcjEK7Ts7fsVK+8a6RpghGE2hoai/0v/8sAU4E4ToLiw=="}]};
+
+/* Page wording in the three languages */
+var T = {
+  fr:{ hero:"Choisissez votre modèle.", heroText:"Câbles, chargeurs et écouteurs pour commerces partenaires. Connectez-vous pour voir les prix et passer votre commande.",
+       all:"Tout", ear:"Écouteurs", cable:"Câbles", charger:"Chargeurs", add:"Ajouter", added:"Ajouté",
+       ask:"Prix : demandez-nous", lockTxt:"Prix réservé aux membres", more:"Voir les détails", close:"Fermer", ways:"Quatre branchements", why:"Pourquoi ce câble", spec:"Fiche technique", login:"Espace membre", logout:"Déconnexion", mTitle:"Espace membre", mText:"Les prix et la commande en ligne sont réservés aux commerces partenaires. Entrez votre code membre.", mLabel:"Code membre", mGo:"Se connecter", mBad:"Ce code n'est pas valide. Vérifiez-le et réessayez.", mJoin:"Pas encore partenaire ? Appelez ou textez le "+SHOP.phone+".",
+       order0:"Ma commande est vide", order:function(n){return "Ma commande : "+n+(n>1?" articles":" article")}, total:"Total", orderHead:"Commande", send:"Envoyer par texto", sendMail:"Envoyer la commande par courriel", sendAuto:"Envoyer la commande", sending:"Envoi en cours…", done:"Commande envoyée. Merci ! Nous vous confirmerons la livraison.", fail:"L'envoi n'a pas fonctionné. Réessayez, ou utilisez le bouton courriel.", each:"l'unité", noPrice:"prix à confirmer", sent:"Appuyez sur Envoyer dans l'application qui s'ouvre. Si rien ne s'ouvre, utilisez « Copier » et envoyez le texte au "+SHOP.phone+" ou à "+SHOP.email+".",
+       tray0:"Ma sélection est vide", tray:function(n){return "Ma sélection : "+n+(n>1?" articles":" article")},
+       show:"Voir", hide:"Masquer", clear:"Vider", copy:"Copier ma sélection", copied:"Sélection copiée. Collez-la dans un message texte au "+SHOP.phone+".",
+       copyFail:"La copie n'a pas fonctionné. Appelez ou textez le "+SHOP.phone+" et dites-nous ce que vous avez choisi.",
+       howTitle:"Comment commander", howText:"Ajoutez vos articles, copiez votre sélection, puis envoyez-la par message texte. Nous confirmons le prix et la disponibilité.",
+       foot:"Boutique indépendante d'accessoires. Les noms de connecteurs servent uniquement à indiquer la compatibilité. Aucune affiliation avec les fabricants d'appareils.", hello:"Bonjour, voici ma sélection :" },
+  en:{ hero:"Pick your model.", heroText:"Cables, chargers and earphones for partner stores. Log in to see prices and place your order.",
+       all:"All", ear:"Earphones", cable:"Cables", charger:"Chargers", add:"Add", added:"Added",
+       ask:"Price: ask us", lockTxt:"Members-only price", more:"See details", close:"Close", ways:"Four ways to plug in", why:"Why this cable", spec:"Specifications", login:"Member login", logout:"Log out", mTitle:"Member login", mText:"Prices and online ordering are reserved for partner stores. Enter your member code.", mLabel:"Member code", mGo:"Log in", mBad:"That code is not valid. Check it and try again.", mJoin:"Not a partner yet? Call or text "+SHOP.phone+".",
+       order0:"My order is empty", order:function(n){return "My order: "+n+(n>1?" items":" item")}, total:"Total", orderHead:"Order", send:"Send by text", sendMail:"Send order by email", sendAuto:"Send order", sending:"Sending…", done:"Order sent. Thank you! We will confirm delivery.", fail:"Sending did not work. Try again, or use the email button.", each:"each", noPrice:"price to confirm", sent:"Tap Send in the app that opens. If nothing opens, use Copy and send the text to "+SHOP.phone+" or "+SHOP.email+".",
+       tray0:"My selection is empty", tray:function(n){return "My selection: "+n+(n>1?" items":" item")},
+       show:"Show", hide:"Hide", clear:"Clear", copy:"Copy my selection", copied:"Selection copied. Paste it into a text message to "+SHOP.phone+".",
+       copyFail:"Copying did not work. Call or text "+SHOP.phone+" and tell us what you picked.",
+       howTitle:"How to order", howText:"Add your items, copy your selection, then send it by text message. We confirm the price and availability.",
+       foot:"Independent accessories shop. Connector names are used only to show compatibility. Not affiliated with any device maker.", hello:"Hello, here is my selection:" },
+  zh:{ hero:"选一款适合你的。", heroText:"面向合作店铺的数据线、充电头、耳机目录。登录后查看价格并下单。",
+       all:"全部", ear:"耳机", cable:"数据线", charger:"充电头", add:"加入", added:"已加入",
+       ask:"价格：请联系我们", lockTxt:"会员可见价格", more:"查看详情", close:"关闭", ways:"四种接法", why:"为什么选这条线", spec:"规格参数", login:"会员登录", logout:"退出", mTitle:"会员登录", mText:"价格和在线订货仅对合作店铺开放。请输入会员码。", mLabel:"会员码", mGo:"登录", mBad:"会员码不正确，请检查后再试。", mJoin:"还不是合作店铺？请致电或发短信到 "+SHOP.phone+"。",
+       order0:"订货单是空的", order:function(n){return "我的订货单："+n+" 件"}, total:"合计", orderHead:"订货单", send:"短信发送订单", sendMail:"邮件发送订单", sendAuto:"提交订单", sending:"正在发送…", done:"订单已发送，谢谢！我们会跟你确认送货。", fail:"发送没有成功。请再试一次，或使用邮件按钮。", each:"每件", noPrice:"价格待确认", sent:"请在打开的应用里点发送。如果没有打开，请点“复制”，把内容发到 "+SHOP.phone+" 或 "+SHOP.email+"。",
+       tray0:"我的清单是空的", tray:function(n){return "我的清单："+n+" 件"},
+       show:"查看", hide:"收起", clear:"清空", copy:"复制我的清单", copied:"清单已复制，粘贴到短信发给 "+SHOP.phone+" 即可。",
+       copyFail:"复制没有成功。请直接打电话或发短信到 "+SHOP.phone+"，告诉我们你选了什么。",
+       howTitle:"怎么下单", howText:"把想要的产品加入清单，复制清单，用短信发给我们。我们会确认价格和库存。",
+       foot:"独立配件小店。接口名称仅用于说明兼容性，与任何设备厂商无关联。", hello:"你好，这是我选的：" }
+};
+
+/* ===================== page logic (no need to edit) ===================== */
+var lang="fr", cat="all", picks={}, cart=[], open=false;
+PRODUCTS.forEach(function(p){ picks[p.id]=p.options.map(function(){return 0}); });
+function $(id){return document.getElementById(id)}
+function el(tag,cls,text){var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e}
+var ICON={ cable:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="18" width="12" height="12" rx="2"/><path d="M18 24h6c6 0 2 12 10 12s4-24 10-24"/></svg>',
+           charger:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="16" width="24" height="24" rx="5"/><path d="M19 16V8M29 16V8M22 31h4"/></svg>',
+           ear:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="18" cy="16" r="8"/><path d="M18 24v16M30 12a8 8 0 0 1 0 16v12"/></svg>' };
+
+var PRICES=null;   /* filled in after a correct member code */
+function fmt(n){ var s=Number(n).toFixed(2); return lang==="fr" ? s.replace(".",",")+" $" : "$"+s; }
+function priceNode(p){
+  var t=T[lang];
+  if(PRICES){ return document.createTextNode(PRICES[p.id]!=null ? fmt(PRICES[p.id]) : t.ask); }
+  var b=el("button","lock"); b.type="button"; b.onclick=openMember;
+  var blur=el("span","blur",lang==="fr"?"88,88 $":"$88.88"); blur.setAttribute("aria-hidden","true");
+  b.appendChild(blur); b.appendChild(el("span","lk","\uD83D\uDD12 "+t.lockTxt)); return b;
+}
+var MEMBER="";
+function b64(s){ var bin=atob(s), a=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i); return a; }
+function hex(buf){ return Array.prototype.map.call(new Uint8Array(buf),function(x){return ("0"+x.toString(16)).slice(-2)}).join(""); }
+function openPrices(kB64,name){
+  return crypto.subtle.importKey("raw",b64(kB64),"AES-GCM",false,["decrypt"])
+    .then(function(k){ return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(LOCKED.p.i)},k,b64(LOCKED.p.c)); })
+    .then(function(buf){ PRICES=JSON.parse(new TextDecoder().decode(buf)); MEMBER=name;
+      try{localStorage.setItem("storeSession",JSON.stringify({k:kB64,name:name}))}catch(e){} });
+}
+function login(code){
+  var pw=String(code||"").replace(/\D/g,"");
+  if(!LOCKED.m||!pw||!window.crypto||!crypto.subtle) return Promise.reject();
+  return crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveBits"])
+    .then(function(k){ return crypto.subtle.deriveBits({name:"PBKDF2",salt:b64(LOCKED.s),iterations:150000,hash:"SHA-512"},k,512); })
+    .then(function(bits){
+      var all=new Uint8Array(bits), tag=hex(all.slice(0,8)), e=LOCKED.m.filter(function(x){return x.t===tag})[0];
+      if(!e) return Promise.reject();
+      return crypto.subtle.importKey("raw",all.slice(32,64),"AES-GCM",false,["decrypt"])
+        .then(function(k){ return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(e.i)},k,b64(e.c)); })
+        .then(function(buf){ var o=JSON.parse(new TextDecoder().decode(buf)); return openPrices(o.k,o.name); });
+    });
+}
+function openMember(){
+  $("mErr").hidden=true; $("mCode").value=""; var m=$("mdlg");
+  if(!m.open){ try{m.showModal()}catch(e){m.setAttribute("open","")} } $("mCode").focus();
+}
+function refreshAll(){ render(); if(shown) openDetail(shown); }
+$("mClose").onclick=function(){$("mdlg").close()};
+$("mdlg").addEventListener("click",function(e){ if(e.target===this) this.close() });
+$("mForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  login($("mCode").value).then(function(){ $("mdlg").close(); refreshAll(); },
+    function(){ $("mErr").textContent=T[lang].mBad; $("mErr").hidden=false; });
+});
+$("acct").onclick=function(){
+  if(PRICES){ PRICES=null; MEMBER=""; try{localStorage.removeItem("storeSession")}catch(e){} refreshAll(); } else openMember();
+};
+function optionText(p){ return p.options.map(function(o,i){return o.values[picks[p.id][i]][lang]}).join(" · "); }
+
+function render(){
+  var t=T[lang];
+  document.documentElement.lang = lang==="zh" ? "zh-Hans" : lang;
+  $("brand").textContent=SHOP.name;
+  $("acct").textContent = PRICES ? MEMBER+" · "+t.logout : t.login; $("acct").className = PRICES ? "acct on" : "acct";
+  $("mTitle").textContent=t.mTitle; $("mText").textContent=t.mText; $("mLabel").textContent=t.mLabel; $("mGo").textContent=t.mGo; $("mJoin").textContent=t.mJoin;
+  $("heroTitle").textContent=t.hero; $("heroText").textContent=t.heroText;
+  $("howTitle").textContent=t.howTitle; $("howText").textContent=t.howText;
+  $("tel").textContent=SHOP.phone; $("tel").href="tel:"+SHOP.phone.replace(/\D/g,"");
+  $("foot").textContent="© "+SHOP.name+". "+t.foot;
+  document.querySelectorAll(".langs button").forEach(function(b){b.setAttribute("aria-pressed", b.dataset.lang===lang)});
+
+  var tabs=$("tabs"); tabs.textContent="";
+  ["all","ear","cable","charger"].filter(function(c){return c==="all"||PRODUCTS.some(function(p){return p.cat===c})}).forEach(function(c){
+    var b=el("button",null,t[c]); b.type="button"; b.setAttribute("aria-pressed", c===cat);
+    b.onclick=function(){cat=c; render()}; tabs.appendChild(b);
+  });
+
+  var grid=$("grid"); grid.textContent="";
+  PRODUCTS.filter(function(p){return cat==="all"||p.cat===cat}).forEach(function(p){
+    var card=el("article","card");
+    var ph=el("div","photo");
+    if(p.img){ var im=el("img"); im.src=p.img; im.alt=p.name[lang]; im.loading="lazy"; ph.appendChild(im); }
+    else { ph.innerHTML=ICON[p.cat]; ph.setAttribute("aria-label",t.soon); }
+    if(p.sample) ph.appendChild(el("span","tag",t.sample));
+    card.appendChild(ph);
+    card.appendChild(el("h2",null,p.name[lang]));
+    card.appendChild(el("p","desc",p.desc[lang]));
+    var pr=el("div","price"); pr.appendChild(priceNode(p)); card.appendChild(pr);
+    p.options.forEach(function(o,i){
+      var box=el("div","opt"); box.appendChild(el("span",null,o.label[lang]));
+      var chips=el("div","chips");
+      o.values.forEach(function(v,j){
+        var b=el("button",null,v[lang]); b.type="button"; b.setAttribute("aria-pressed", picks[p.id][i]===j);
+        b.onclick=function(){picks[p.id][i]=j; render()}; chips.appendChild(b);
+      });
+      box.appendChild(chips); card.appendChild(box);
+    });
+    var add=el("button","add",t.add); add.type="button";
+    add.onclick=function(){
+      var key=p.id+"|"+picks[p.id].join(",");
+      var hit=cart.filter(function(c){return c.key===key})[0];
+      if(hit) hit.qty++; else cart.push({key:key,id:p.id,sel:picks[p.id].slice(),qty:1});
+      $("note").hidden=true; if(PRICES)open=true; renderTray();
+      add.textContent=t.added+" ✓"; setTimeout(function(){add.textContent=T[lang].add},900);
+    };
+    var acts=el("div","card-actions"); acts.appendChild(add);
+    if(p.detail){ var m=el("button","more",t.more+" ›"); m.type="button"; m.onclick=function(){openDetail(p)}; acts.appendChild(m); }
+    card.appendChild(acts); grid.appendChild(card);
+  });
+  renderTray();
+}
+
+var shown=null;
+function openDetail(p){
+  shown=p; var t=T[lang], d=p.detail, body=$("dBody"); body.textContent="";
+  var top=el("div","d-top"), h=el("h2",null,p.name[lang]); h.id="dTitle";
+  var x=el("button","d-close","×"); x.type="button"; x.setAttribute("aria-label",t.close); x.onclick=function(){$("dlg").close()};
+  top.appendChild(h); top.appendChild(x); body.appendChild(top);
+  body.appendChild(el("p","d-lead",d.lead[lang]));
+  var dp=el("div","d-price"); dp.appendChild(priceNode(p)); body.appendChild(dp);
+  if(d.video){ var vb=el("div","d-video"), v=el("video"); v.src=d.video; if(d.poster)v.poster=d.poster;
+    v.controls=true; v.playsInline=true; v.setAttribute("playsinline",""); v.preload="metadata"; vb.appendChild(v); body.appendChild(vb); }
+  if(d.gallery){ var g=el("div","gal");
+    d.gallery.forEach(function(src,i){ var im=el("img"); im.src=src; im.alt=p.name[lang]+" "+(i+1); var zb=el("button"); zb.type="button"; zb.onclick=function(){openZoom(d.gallery,i)}; zb.appendChild(im); g.appendChild(zb); }); body.appendChild(g); }
+  else if(p.img){ var ph=el("div","d-photo"), im2=el("img"); im2.src=p.img; im2.alt=p.name[lang]; ph.appendChild(im2); body.appendChild(ph); }
+  var s1=el("section"); s1.appendChild(el("h3","d-h",t.ways)); var cg=el("div","combos");
+  d.combos.forEach(function(c){
+    var box=el("div","combo"), pl=el("div","plug");
+    pl.appendChild(el("i",c.a)); pl.appendChild(el("span")); pl.appendChild(el("i",c.b));
+    box.appendChild(pl); box.appendChild(el("b",null,c.t)); box.appendChild(el("small",null,c.n[lang])); cg.appendChild(box);
+  });
+  s1.appendChild(cg); body.appendChild(s1);
+  var s2=el("section"); s2.appendChild(el("h3","d-h",t.why)); var ul=el("ul","points");
+  d.points.forEach(function(q){ var li=el("li"); li.appendChild(el("b",null,q.h[lang])); li.appendChild(el("span",null,q.p[lang])); ul.appendChild(li); });
+  s2.appendChild(ul); body.appendChild(s2);
+  var s3=el("section"); s3.appendChild(el("h3","d-h",t.spec)); var tb=el("table","specs");
+  d.specs.forEach(function(r){ var tr=el("tr"); tr.appendChild(el("th",null,r[0][lang])); tr.appendChild(el("td",null,r[1][lang])); tb.appendChild(tr); });
+  s3.appendChild(tb); body.appendChild(s3);
+  body.appendChild(el("p","d-fine",d.fine[lang]));
+  var dlg=$("dlg"); if(!dlg.open){ try{dlg.showModal()}catch(e){dlg.setAttribute("open","")} }
+}
+$("dlg").addEventListener("click",function(e){ if(e.target===this) this.close() });
+$("dlg").addEventListener("close",function(){ shown=null; $("dBody").textContent="" });
+
+var zList=[], zI=0;
+function showZoom(){ $("zImg").src=zList[zI]; $("zCount").textContent=(zI+1)+" / "+zList.length; }
+function openZoom(list,i){ zList=list; zI=i; showZoom(); var z=$("zoom"); if(!z.open){ try{z.showModal()}catch(e){z.setAttribute("open","")} } }
+function stepZoom(n){ zI=(zI+n+zList.length)%zList.length; showZoom(); }
+$("zClose").onclick=function(){$("zoom").close()};
+$("zPrev").onclick=function(){stepZoom(-1)}; $("zNext").onclick=function(){stepZoom(1)};
+$("zIn").addEventListener("click",function(e){ if(e.target===this) $("zoom").close() });
+$("zoom").addEventListener("keydown",function(e){ if(e.key==="ArrowLeft")stepZoom(-1); if(e.key==="ArrowRight")stepZoom(1); });
+
+function lineText(c){
+  var p=PRODUCTS.filter(function(x){return x.id===c.id})[0];
+  return { name:p.name[lang], opts:p.options.map(function(o,i){return o.values[c.sel[i]][lang]}).join(" · ") };
+}
+function orderTotal(){ var s=0; cart.forEach(function(c){ if(PRICES&&PRICES[c.id]!=null) s+=PRICES[c.id]*c.qty }); return s; }
+function orderText(){
+  var t=T[lang], d=new Date().toISOString().slice(0,10);
+  if(!PRICES) return t.hello+"\n"+cart.map(function(c){var L=lineText(c); return "• "+c.qty+" × "+L.name+" ("+L.opts+")"}).join("\n");
+  return t.orderHead+" · "+MEMBER+" · "+d+"\n"+cart.map(function(c){ var L=lineText(c), pr=PRICES[c.id];
+    return "• "+c.qty+" × "+L.name+" ("+L.opts+")"+(pr!=null ? " @ "+fmt(pr)+" = "+fmt(pr*c.qty) : " ("+t.noPrice+")") }).join("\n")+"\n"+t.total+" : "+fmt(orderTotal());
+}
+function renderTray(){
+  var t=T[lang], n=cart.reduce(function(s,c){return s+c.qty},0);
+  $("trayTitle").textContent = PRICES ? (n ? t.order(n)+" · "+fmt(orderTotal()) : t.order0) : (n ? t.tray(n) : t.tray0);
+  $("toggle").textContent = open ? t.hide : t.show; $("clear").textContent=t.clear; $("copy").textContent=PRICES ? t.copy.split(" ")[0] : t.copy;
+  $("toggle").disabled=$("clear").disabled=$("copy").disabled=!n;
+  var sm=$("sendMail"), sa=$("sendAuto"); sm.textContent=t.sendMail; if(!sending) sa.textContent=t.sendAuto;
+  sa.hidden=!(PRICES&&n&&SHOP.formKey); sm.hidden=!(PRICES&&n&&(!SHOP.formKey||mailFallback));
+  if(PRICES&&n){ var body=encodeURIComponent(orderText());
+    sm.href="mailto:"+SHOP.email+"?subject="+encodeURIComponent(t.orderHead+" · "+MEMBER+" · "+fmt(orderTotal()))+"&body="+body; }
+  var list=$("list"); list.textContent=""; list.hidden=!(open&&n);
+  var tot=$("tot"); tot.hidden=!(open&&n&&PRICES); tot.textContent="";
+  if(PRICES){ tot.appendChild(el("span",null,t.total)); tot.appendChild(el("span",null,fmt(orderTotal()))); }
+  cart.forEach(function(c,idx){
+    var L=lineText(c), li=el("li"), left=el("div"), pr=PRICES?PRICES[c.id]:null;
+    left.appendChild(document.createTextNode(L.name));
+    left.appendChild(el("small",null,L.opts+(PRICES ? " · "+(pr!=null ? fmt(pr)+" "+t.each+" = "+fmt(pr*c.qty) : t.noPrice) : "")));
+    var q=el("div","qty"), minus=el("button",null,"−"), plus=el("button",null,"+"), inp=el("input");
+    minus.type=plus.type="button"; minus.setAttribute("aria-label","−1"); plus.setAttribute("aria-label","+1");
+    inp.type="number"; inp.min="1"; inp.value=c.qty; inp.id="qty-"+idx; inp.setAttribute("aria-label",L.name); inp.inputMode="numeric";
+    inp.onchange=function(){ var v=parseInt(inp.value,10); c.qty = v>0 ? Math.min(v,9999) : 1; renderTray() };
+    minus.onclick=function(){c.qty--; if(c.qty<1)cart.splice(idx,1); if(!cart.length)open=false; renderTray()};
+    plus.onclick=function(){c.qty++; renderTray()};
+    q.appendChild(minus); q.appendChild(inp); q.appendChild(plus);
+    li.appendChild(left); li.appendChild(q); list.appendChild(li);
+  });
+}
+var sending=false, mailFallback=false;
+$("sendAuto").onclick=function(){
+  if(sending||!cart.length) return; var t=T[lang], sa=$("sendAuto"), note=$("note");
+  sending=true; sa.disabled=true; sa.textContent=t.sending;
+  function finish(ok){ sending=false; sa.disabled=false; note.hidden=false;
+    if(ok){ cart=[]; open=false; mailFallback=false; note.textContent=t.done; } else { mailFallback=true; note.textContent=t.fail; }
+    renderTray(); }
+  fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify({access_key:SHOP.formKey, subject:t.orderHead+" · "+MEMBER+" · "+fmt(orderTotal()), from_name:MEMBER, message:orderText()})})
+    .then(function(r){return r.json()}).then(function(j){finish(!!(j&&j.success))},function(){finish(false)});
+};
+["sendMail"].forEach(function(id){ $(id).addEventListener("click",function(){ var note=$("note"); note.hidden=false; note.textContent=T[lang].sent; }); });
+$("toggle").onclick=function(){open=!open; renderTray()};
+$("clear").onclick=function(){cart=[]; open=false; $("note").hidden=true; renderTray()};
+$("copy").onclick=function(){
+  var t=T[lang], text=orderText(), note=$("note"); note.hidden=false;
+  function ok(){note.textContent=t.copied} function bad(){note.textContent=t.copyFail; open=true; renderTray()}
+  try{ navigator.clipboard.writeText(text).then(ok,bad) }catch(e){ bad() }
+};
+document.querySelectorAll(".langs button").forEach(function(b){ b.onclick=function(){lang=b.dataset.lang; $("note").hidden=true; refreshAll()} });
+render();
+try{ var saved=JSON.parse(localStorage.getItem("storeSession")||"null"); if(saved&&saved.k) openPrices(saved.k,saved.name).then(refreshAll,function(){}); }catch(e){}
+</script>
+</body>
+</html>
