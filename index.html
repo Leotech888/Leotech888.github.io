@@ -253,10 +253,35 @@ var PRODUCTS = [
     name:{fr:"Écouteurs filaires Lightning, en boîtier", en:"Lightning wired earphones, boxed", zh:"Lightning 有线耳机（盒装）"},
     desc:{fr:"Présentés dans un boîtier de rangement. Micro et télécommande sur le fil.", en:"Packed in a storage tray. In-line mic and remote.", zh:"带收纳托盘包装，线控加麦克风。"},
     options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
-  { id:"ear-c", cat:"ear", img:"ecouteurs-sans-fil.jpg", price:"",
+  { id:"ear-c", cat:"ear", img:"earbuds-case.jpg", price:"",
     name:{fr:"Écouteurs sans fil Bluetooth", en:"Bluetooth wireless earbuds", zh:"蓝牙无线耳机"},
-    desc:{fr:"Intra-auriculaires avec embouts en silicone et boîtier de recharge.", en:"In-ear buds with silicone tips and a charging case.", zh:"入耳式，带硅胶耳塞和充电盒。"},
-    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
+    desc:{fr:"Intra-auriculaires avec réduction du bruit, mode transparence, commandes tactiles et boîtier de recharge USB-C.", en:"In-ear buds with noise reduction, transparency mode, touch controls and a USB-C charging case.", zh:"入耳式，带降噪、通透模式、触控操作和 Type-C 充电盒。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ],
+    detail:{
+      video:"earbuds.mp4", poster:"earbuds-poster.jpg", portrait:true,
+      gallery:["earbuds-case.jpg","earbuds-open.jpg","earbuds-usbc.jpg"],
+      whyTitle:{fr:"Ce qu'il faut savoir",en:"What to know",zh:"产品特点"},
+      lead:{fr:"Des écouteurs intra-auriculaires sans fil avec réduction du bruit, mode transparence et commandes tactiles, livrés avec leur boîtier de recharge USB-C.", en:"Wireless in-ear earbuds with noise reduction, transparency mode and touch controls, supplied with a USB-C charging case.", zh:"带降噪、通透模式和触控操作的入耳式无线耳机，附带 Type-C 充电盒。"},
+      points:[
+        {h:{fr:"Réduction du bruit",en:"Noise reduction",zh:"降噪"}, p:{fr:"Atténue les bruits ambiants pour mieux écouter votre musique et vos appels.",en:"Cuts background noise so music and calls come through clearly.",zh:"减弱环境噪音，听音乐、打电话更清楚。"}},
+        {h:{fr:"Mode transparence",en:"Transparency mode",zh:"通透模式"}, p:{fr:"Laisse passer les sons autour de vous, pour rester attentif en marchant ou en parlant.",en:"Lets outside sound in, so you stay aware while walking or talking.",zh:"让周围的声音进来，走路或说话时也能听清环境。"}},
+        {h:{fr:"Commandes tactiles",en:"Touch controls",zh:"触控操作"}, p:{fr:"Touchez l'écouteur pour gérer la lecture et les appels.",en:"Touch the earbud to control playback and calls.",zh:"轻触耳机就能控制播放和接听电话。"}},
+        {h:{fr:"Sans fil",en:"Wireless",zh:"无线连接"}, p:{fr:"Se connectent au téléphone par Bluetooth, sans câble.",en:"Connect to your phone over Bluetooth, no cable.",zh:"通过蓝牙连接手机，不用线。"}},
+        {h:{fr:"Autonomie et boîtier de recharge",en:"Battery life and charging case",zh:"续航和充电盒"}, p:{fr:"Les écouteurs se rangent et se rechargent dans le boîtier, doté d'un voyant lumineux. Le boîtier se recharge par USB-C.",en:"The earbuds store and recharge in the case, which has an indicator light. The case charges over USB-C.",zh:"耳机放进充电盒里收纳和充电，盒上有指示灯。充电盒用 Type-C 接口充电。"}},
+        {h:{fr:"Embouts en silicone",en:"Silicone tips",zh:"硅胶耳塞"}, p:{fr:"Les embouts souples s'ajustent à l'oreille.",en:"Soft tips fit snugly in the ear.",zh:"柔软的耳塞，贴合耳朵。"}}
+      ],
+      specs:[
+        [{fr:"Type",en:"Type",zh:"类型"}, {fr:"Intra-auriculaires sans fil",en:"Wireless in-ear",zh:"无线入耳式"}],
+        [{fr:"Réduction du bruit",en:"Noise reduction",zh:"降噪"}, {fr:"Oui",en:"Yes",zh:"支持"}],
+        [{fr:"Mode transparence",en:"Transparency mode",zh:"通透模式"}, {fr:"Oui",en:"Yes",zh:"支持"}],
+        [{fr:"Commandes",en:"Controls",zh:"操作方式"}, {fr:"Tactiles",en:"Touch",zh:"触控"}],
+        [{fr:"Connexion",en:"Connection",zh:"连接方式"}, {fr:"Bluetooth",en:"Bluetooth",zh:"蓝牙"}],
+        [{fr:"Embouts",en:"Ear tips",zh:"耳塞"}, {fr:"Silicone",en:"Silicone",zh:"硅胶"}],
+        [{fr:"Boîtier",en:"Case",zh:"充电盒"}, {fr:"Boîtier de recharge USB-C avec voyant lumineux",en:"USB-C charging case with indicator light",zh:"Type-C 充电盒，带指示灯"}],
+        [{fr:"Couleur",en:"Colour",zh:"颜色"}, {fr:"Blanc",en:"White",zh:"白色"}]
+      ],
+      fine:{fr:"Les couleurs et l'apparence peuvent varier légèrement selon l'écran.",en:"Colours and appearance may look slightly different on your screen.",zh:"颜色和外观在不同屏幕上可能略有差别。"}
+    } },
   { id:"cable-4in1", cat:"cable", img:"cable-4-en-1-g5.jpg",
     name:{fr:"Câble de recharge 4 en 1", en:"4 in One Charging Cable", zh:"四合一充电线"},
     desc:{fr:"Un câble, quatre branchements. USB-A ou USB-C d'un côté, USB-C ou Lightning de l'autre. Jusqu'à 65 W.", en:"One cable, four ways to plug in. USB-A or USB-C on one end, USB-C or Lightning on the other. Up to 65 W.", zh:"一条线，四种接法。一头 USB-A 或 USB-C，另一头 USB-C 或 Lightning，最高 65 W。"},
@@ -277,7 +302,7 @@ var PRODUCTS = [
         {h:{fr:"Facile à ranger",en:"Easy to pack",zh:"好收纳"}, p:{fr:"Attache auto-agrippante incluse pour l'enrouler proprement.",en:"Hook-and-loop strap included to keep it coiled.",zh:"自带魔术贴绑带，卷起来不散。"}}
       ],
       specs:[
-        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"0,9 m (3 pi)",en:"0.9 m (3 ft)",zh:"0.9 米（3 英尺）"}],
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1 m (3 pi)",en:"1 m (3 ft)",zh:"1 米（3 英尺）"}],
         [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-A et USB-C d'un côté, USB-C et Lightning de l'autre",en:"USB-A and USB-C on one end, USB-C and Lightning on the other",zh:"一头 USB-A 加 USB-C，另一头 USB-C 加 Lightning"}],
         [{fr:"Puissance maximale",en:"Maximum power",zh:"最大功率"}, {fr:"65 W (USB-C vers USB-C), 27 W (vers Lightning)",en:"65 W (USB-C to USB-C), 27 W (to Lightning)",zh:"65 W（USB-C 对 USB-C），27 W（接 Lightning）"}],
         [{fr:"Transfert de données",en:"Data transfer",zh:"数据传输"}, {fr:"Jusqu'à 480 Mb/s",en:"Up to 480 Mbps",zh:"最高 480 Mbps"}],
@@ -289,13 +314,14 @@ var PRODUCTS = [
   { id:"cable-apple", cat:"cable", img:"apple-blanc.jpg",
     imgs:["apple-blanc.jpg","apple-orange.jpg","apple-bordeaux.jpg"],
     name:{fr:"Câble Apple", en:"Apple cable", zh:"苹果数据线"},
-    desc:{fr:"USB-C vers USB-C, 1 m. Offert en blanc, orange et bordeaux.", en:"USB-C to USB-C, 1 m (3 ft). Available in white, orange and burgundy.", zh:"USB-C 对 USB-C，1 米。有白色、橙色、酒红色。"},
+    desc:{fr:"USB-C vers USB-C, 1 m. Recharge rapide et transfert de données. Blanc, orange ou bordeaux.", en:"USB-C to USB-C, 1 m (3 ft). Fast charging and data transfer. White, orange or burgundy.", zh:"USB-C 对 USB-C，1 米。支持快充和数据传输。有白色、橙色、酒红色。"},
     options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}, {fr:"Orange",en:"Orange",zh:"橙色"}, {fr:"Bordeaux",en:"Burgundy",zh:"酒红色"}]} ],
     detail:{
       video:"apple-cable-usbc.mp4", poster:"apple-cable-usbc-poster.jpg", portrait:true,
       gallery:["apple-blanc.jpg","apple-bordeaux.jpg","apple-orange.jpg","apple-blanc-main.jpg","apple-blanc-lot.jpg"],
-      lead:{fr:"Un câble tressé USB-C vers USB-C, enroulé et prêt à vendre. Choisissez la couleur au moment de commander.", en:"A braided USB-C to USB-C cable, coiled and ready to sell. Pick the colour when you order.", zh:"USB-C 对 USB-C 编织线，已卷好、可直接上架。下单时选颜色。"},
+      lead:{fr:"Un câble tressé USB-C vers USB-C qui prend en charge la recharge rapide et le transfert de données. Choisissez la couleur au moment de commander.", en:"A braided USB-C to USB-C cable that supports fast charging and data transfer. Pick the colour when you order.", zh:"USB-C 对 USB-C 编织线，支持快充和数据传输。下单时选颜色。"},
       points:[
+        {h:{fr:"Recharge rapide et données",en:"Fast charging and data",zh:"快充加数据传输"}, p:{fr:"Prend en charge la recharge rapide et le transfert de données.",en:"Supports fast charging and data transfer.",zh:"支持快速充电，也能传输数据。"}},
         {h:{fr:"Trois couleurs",en:"Three colours",zh:"三种颜色"}, p:{fr:"Blanc, orange et bordeaux. Chaque commande indique la couleur choisie.",en:"White, orange and burgundy. Each order line shows the colour you picked.",zh:"白色、橙色、酒红色，订单里会标明你选的颜色。"}},
         {h:{fr:"USB-C aux deux bouts",en:"USB-C on both ends",zh:"两头都是 USB-C"}, p:{fr:"Pour les appareils munis d'un port USB-C.",en:"For devices with a USB-C port.",zh:"适用于带 USB-C 接口的设备。"}},
         {h:{fr:"Prêt pour le comptoir",en:"Counter-ready",zh:"包装好，可直接摆"}, p:{fr:"Enroulé sur un carton, avec un outil d'éjection de carte SIM inclus.",en:"Coiled on a card, with a SIM-tray ejector tool included.",zh:"卷在卡纸上，附赠取卡针。"}}
@@ -304,10 +330,11 @@ var PRODUCTS = [
         [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1 m (3 pi)",en:"1 m (3 ft)",zh:"1 米（3 英尺）"}],
         [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-C aux deux bouts",en:"USB-C on both ends",zh:"两头 USB-C"}],
         [{fr:"Gaine",en:"Jacket",zh:"线身"}, {fr:"Tressée",en:"Braided",zh:"编织"}],
+        [{fr:"Fonctions",en:"Features",zh:"功能"}, {fr:"Recharge rapide et transfert de données",en:"Fast charging and data transfer",zh:"快充和数据传输"}],
         [{fr:"Couleurs",en:"Colours",zh:"颜色"}, {fr:"Blanc, orange, bordeaux",en:"White, orange, burgundy",zh:"白色、橙色、酒红色"}],
         [{fr:"Inclus",en:"Included",zh:"附带"}, {fr:"Outil d'éjection de carte SIM",en:"SIM-tray ejector tool",zh:"取卡针"}]
       ],
-      fine:{fr:"Les couleurs peuvent varier légèrement selon l'écran.",en:"Colours may look slightly different on your screen.",zh:"颜色在不同屏幕上可能略有差别。"}
+      fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés. Les couleurs peuvent varier légèrement selon l'écran.",en:"Actual charging speed depends on your device and charger. Colours may look slightly different on your screen.",zh:"实际充电速度取决于设备和充电头。颜色在不同屏幕上可能略有差别。"}
     } },
   { id:"cable-rainbow", cat:"cable", img:"", price:"",
     name:{fr:"Câble arc-en-ciel tressé", en:"Rainbow braided cable", zh:"彩虹编织线"},
@@ -329,10 +356,29 @@ var PRODUCTS = [
     name:{fr:"Câble de rallonge 3 m", en:"3 m extension cable", zh:"3 米加长线"},
     desc:{fr:"Câble long de 3 m pour recharger depuis le lit, le canapé ou le comptoir.", en:"Long 3 m (10 ft) cable to charge from bed, sofa or counter.", zh:"3 米长线，躺床上、坐沙发、站柜台都能充。"},
     options:[] },
-  { id:"charger-45w", cat:"charger", img:"", price:"",
+  { id:"charger-45w", cat:"charger", img:"charger-45w-front.jpg",
     name:{fr:"Bloc de charge rapide 45 W", en:"45W fast charging block", zh:"45W 快充头"},
-    desc:{fr:"Chargeur mural à recharge rapide, 45 W.", en:"Wall charger with 45 W fast charging.", zh:"45W 快充充电头。"},
-    options:[] },
+    desc:{fr:"Recharge rapide pour téléphone et ordinateur portable. Un port USB-C et un port USB-A.", en:"Fast charging for phone and laptop. One USB-C and one USB-A port.", zh:"手机和笔记本电脑都能快充。一个 USB-C 口加一个 USB-A 口。"},
+    options:[],
+    detail:{
+      whyTitle:{fr:"Pourquoi ce chargeur",en:"Why this charger",zh:"为什么选这个充电头"},
+      video:"charger-45w.mp4", poster:"charger-45w-poster.jpg", portrait:true,
+      gallery:["charger-45w-front.jpg","charger-45w-ports.jpg","charger-45w-label.jpg"],
+      lead:{fr:"Un seul chargeur pour le téléphone et l'ordinateur portable. Recharge rapide, avec un port USB-C et un port USB-A.", en:"One charger for your phone and your laptop. Fast charging, with one USB-C and one USB-A port.", zh:"一个充电头，手机和笔记本电脑都能充，支持快充。一个 USB-C 口，一个 USB-A 口。"},
+      points:[
+        {h:{fr:"Téléphone et ordinateur portable",en:"Phone and laptop",zh:"手机和笔记本都能充"}, p:{fr:"Assez puissant pour recharger rapidement un téléphone comme un ordinateur portable.",en:"Powerful enough to fast-charge a phone as well as a laptop.",zh:"功率足够，手机和笔记本电脑都能快充。"}},
+        {h:{fr:"Deux ports",en:"Two ports",zh:"两个接口"}, p:{fr:"Un port USB-C et un port USB-A, pour les câbles les plus courants.",en:"One USB-C and one USB-A port, for the most common cables.",zh:"一个 USB-C 口和一个 USB-A 口，常见的线都能接。"}},
+        {h:{fr:"Fiche nord-américaine",en:"North American plug",zh:"北美标准插头"}, p:{fr:"Fiche à deux broches, adaptée aux prises canadiennes.",en:"Two-pin plug that fits Canadian outlets.",zh:"两脚插头，适合加拿大插座。"}}
+      ],
+      specs:[
+        [{fr:"Puissance",en:"Power",zh:"功率"}, {fr:"Jusqu'à 45 W",en:"Up to 45 W",zh:"最高 45 W"}],
+        [{fr:"Ports",en:"Ports",zh:"接口"}, {fr:"1 × USB-C, 1 × USB-A",en:"1 × USB-C, 1 × USB-A",zh:"1 个 USB-C，1 个 USB-A"}],
+        [{fr:"Entrée",en:"Input",zh:"输入"}, {fr:"100–240 V c.a., 50/60 Hz",en:"100–240 V AC, 50/60 Hz",zh:"100–240 V 交流，50/60 Hz"}],
+        [{fr:"Fiche",en:"Plug",zh:"插头"}, {fr:"Nord-américaine, 2 broches",en:"North American, 2-pin",zh:"北美标准，两脚"}],
+        [{fr:"Compatible avec",en:"Works with",zh:"适用设备"}, {fr:"Téléphones, tablettes et ordinateurs portables rechargeables par USB",en:"Phones, tablets and laptops that charge over USB",zh:"可通过 USB 充电的手机、平板、笔记本电脑"}]
+      ],
+      fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du câble utilisés.",en:"Actual charging speed depends on your device and cable.",zh:"实际充电速度取决于你的设备和充电线。"}
+    } },
   { id:"adapter", cat:"ear", img:"", price:"",
     name:{fr:"Adaptateur audio pour écouteurs", en:"Headphone audio adapter", zh:"耳机转接插头"},
     desc:{fr:"Adaptateur pour brancher des écouteurs filaires.", en:"Adapter to connect wired earphones.", zh:"用于连接有线耳机的转接头。"},
@@ -341,7 +387,7 @@ var PRODUCTS = [
 var ORDER={cable:0,charger:1,ear:2}; PRODUCTS.sort(function(a,b){return ORDER[a.cat]-ORDER[b.cat]});
 
 /* Member logins and prices, locked. Do not edit by hand. */
-var LOCKED = {"p":{"i":"G5Kx5Gssvk39r+pr","c":"MWay241VM299I2LX2nbSOIZFUUEGZQSe+jdgahArGQ4q8APia4IoW+W8ohEDJ+npzJuLE5CDr2nMQQ3+biltxGbN5bJNymFgJGyGeTrars+n6NKT3dQQe2RYHEpG3/e8ZzaPQDVu/VT8rfYOhmQR9lggwB9k6CLF6jb4N74qCXmgnHHK2JOJ2BKNl+S/+1y9xnN6MFC0xNvibMxoYwEDmiYCUvZGR8ancNk5FUMhh8TsKi/5OuPj2apyWgTOTwClC0c60Ec9jvXOCrzjvjeS9ny1wWOE4YtUhYaEEu2Ra0tq7PPoHcN88A=="},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"4cd5b27069d7d14c","i":"bn0OhWhQn9RV9s4C","c":"/SIfEFCR1RWHQgsXR+D659C83/F5TPTXcZWsLmcUY4hlZXkEV5xJGyzR20sRFMUgQojscnnGIDWy97DnSULL7/RSZAF9mwVKm9bgQOSfyj/av3gEtfK/KjSznvFMBtpKSKB8lTmuxg=="},{"t":"f00dce2cc66e753e","i":"qMVdFfOf00SUDzqQ","c":"3EkMa6n7LvBZLF2ywEL8/N36+93HUEfgjsl/m9JwQ3Nr6Mg5PfHpBk9JV+8jdA8PPZzBDKv/hdBiKplPQILeLNHS9xiqwJ4jRU6CSjo5xAciNjJibTZX5ZyLUasNhcI="},{"t":"699ff3ccf5b18011","i":"zVbl7jN4PmTBzkgB","c":"PrBSNmG0LFPwtoi/OCqyYU6TqkfRV7ktgN8sJPxEFNflGhux8Ce982gPOoreZzbR2bDOJ4YYPwDU2C4j6XyloNIPhmbXg7LP+7vzLwHYfXXk6y3Dapj6pTTU9zvnTOCZ49EX1dKxUGs="},{"t":"75c8fb45d4f09454","i":"9WeveuS67w4Z1tEv","c":"bLoQnvEvIHQ4vB1OxCd22lmDZcs8jegYhgYUMpbDzN981WasUZkFPiGZw+uXccDVd5aYQbcvpsRtEIc6B09+SoKhplbzaHwk1QWKuut2b/kuduRKVLWgHxSI5r8Er9DE"},{"t":"21e9ed0feb25d863","i":"n4Mitxn16aAa60Pk","c":"gt9fLonLQONomcqFL5PpvA1WWcLhVSr3hzAd50CEzrWwuqtoPSf91ydok4HQBn/39Of7iCBn2prDJWjk423f3Wt+zOjzqU/qtr+fUkcGKORjuSORyRsnPzDzmmTIJpM70u41/XsVOg=="},{"t":"78c323a0552d2dc3","i":"SF1Ee+lPzysgGRWQ","c":"eJ/f24dlUlNPCKrH4HSPztyh2fC2eP7NE3eU8+OCM8YdTUoBjo7gyNwqRT5YDuvEawQU48+YgC4z4g3j8I3QhYxlakoNP/lyAG7kpO5kEHhm7xLnwzHe5OnvTuJDGa7p1LM="},{"t":"e0fd6ae82113e88b","i":"QkFVuFjziIBXuOQp","c":"D39kLVe4n2hk9zNlq9fvZar5pnkHDYaC17pYuEHgc6Xq2B7t5wGWyQ+yziQbC9wQ73xCpvGzdJaQkKGvF/1UZRgqRwY/pxqLaKqj4f1oEwvGHxj+06hKlv84mKXasTn+hb19YnK7Y8tw"},{"t":"70cf037b3d00b990","i":"uhdemP8JW2tw8ccP","c":"c/cWSuBNcWN/QFFXnarRnBy73VHdclPd+fAfyeCjC9EujNbKNXf3CB4Vgb+LXUbFzdtm826vm9ThuK0p7D7O10xjKZGLlfHgrtQsgB/16+R5YXisMbsVJn6qFTjCG+9b9Q=="},{"t":"8c72aed0082724af","i":"RmKoJuEK0XuE9mFs","c":"0/ZbxbICMF/oeSevyOWAWgHlcAfHouiVnkNZse53D3uobKsayZ/tjX/0hAxi3Y3HVbQOYuOU6JUb/O0y6rV9XHoWLm9ce8vKbg5ioz3GBRtKY5JU7BD5K95oSU4+"},{"t":"1b94a3b077a611b4","i":"mcxwpHG4qcenoQxs","c":"kiNmFC5sEztpGFW5W8aS1zoUcxqVAEYyGtKvyfydi8mOcyHDVLFlwwexHT4/vRS/W81T5SsH7Cgr7fudE+mQPTsd4HGNl+fRiYK5LrDTDDYlKCmAKl3RhIA5pOyvKE3BaA=="},{"t":"b1e1757fc27c4021","i":"sho98Cft2V2Mnb0n","c":"pHrOovVAMXwfbE0BoAp+wIYmtZ6wsSR+Q1+hiouooqYNSp9MwG1edcTMX3GfGihi1MJrQ6HQ+YJy4UCv/8RGT/i+8spTGzw1bM1FaOdsVYZUIKep2qLBgP/Gy9amxmaglQ=="},{"t":"934e18b54b7db3c8","i":"k6mNCPa4aemO/Z4T","c":"O0tCWjPPduKQ59OjfAb5nPYFBR58BNuNeFWUVN3IlmkZv7SxutCmn3omK8w+3Czqb2pgzUfXLoT6fLsNXyewfJe408eAOolszJKnnzYO5VME0SGT9e40MeRmJsVZvxY4f4IC2IH2yw=="},{"t":"3386dd2a844410c6","i":"wdc3oxbDDD3ktNv6","c":"YW2gp1/A0Qj4oBtsnWqkAhxoURDTUrQ6KJp0XF73Jqp7VHusqD6xZw4F2dJdGlHd1Byl4FjYVeJiGGz+/wKXBrAbo1+CfLTcQaIzfwzPzwQwViMHIQ2yXWNIY8Jn7R/e1E3iihPD"},{"t":"345cc5ebbff28224","i":"13pWnU8khVXWWYL0","c":"v7t+5RLo/199ID6L04pbGiobUDTVMeiA3+sp8zCeyPsV0NoAyhRImRVPkJ73T1PZuXIkTBqXiwdoYG1UhB85PD1QfDnE+jQ/MYEtA/HWCJGkl66TWhR2aJd+kFWV4iEezUgRBIDCA76/l0UMZkI="},{"t":"08dd3308d977530f","i":"rmfD9iWW0qp1I4hP","c":"evMHUs/tVn//EcS8CY2VUf4kQVVlJwW8Ino/Zv38KGv7BFidMmG3Amq9f8Qobn3gD53ie+SBKtK/rBoHlZXKLyIkoQIdgnTx6cO7dxNeR1kqlqFAZjx3Jqu8Ta0Nnra94w=="}]};
+var LOCKED = {"p":{"i":"G5Kx5Gssvk39r+pr","c":"MWay241VM299I2LX2nbSOIZFUUEGZQSe+jdgahArGQ4q8APia4IoW+W8ohEDJ+npzJuLE5CDr2nMQQ3+biltxGbN5bJNymFgJGyGeTrars+n6NKT3dQQe2RYHEpG3/e8ZzaPQDVu/VT8rfYOhmQR9lggwB9k6CLF6jb4N74qCXmgnHHK2JOJ2BKNl+S/+1y9xnN6MFC0xNvibMxoYwEDmiYCUvZGR8ancNk5FUMhh8TsKi/5OuPj2apyWgTOTwClC0c60Ec9jvXOCrzjvjeS9ny1wWOE4YtUhYaEEu2Ra0tq7PPoHcN88A=="},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"f00dce2cc66e753e","i":"qMVdFfOf00SUDzqQ","c":"3EkMa6n7LvBZLF2ywEL8/N36+93HUEfgjsl/m9JwQ3Nr6Mg5PfHpBk9JV+8jdA8PPZzBDKv/hdBiKplPQILeLNHS9xiqwJ4jRU6CSjo5xAciNjJibTZX5ZyLUasNhcI="},{"t":"699ff3ccf5b18011","i":"zVbl7jN4PmTBzkgB","c":"PrBSNmG0LFPwtoi/OCqyYU6TqkfRV7ktgN8sJPxEFNflGhux8Ce982gPOoreZzbR2bDOJ4YYPwDU2C4j6XyloNIPhmbXg7LP+7vzLwHYfXXk6y3Dapj6pTTU9zvnTOCZ49EX1dKxUGs="},{"t":"75c8fb45d4f09454","i":"9WeveuS67w4Z1tEv","c":"bLoQnvEvIHQ4vB1OxCd22lmDZcs8jegYhgYUMpbDzN981WasUZkFPiGZw+uXccDVd5aYQbcvpsRtEIc6B09+SoKhplbzaHwk1QWKuut2b/kuduRKVLWgHxSI5r8Er9DE"},{"t":"21e9ed0feb25d863","i":"n4Mitxn16aAa60Pk","c":"gt9fLonLQONomcqFL5PpvA1WWcLhVSr3hzAd50CEzrWwuqtoPSf91ydok4HQBn/39Of7iCBn2prDJWjk423f3Wt+zOjzqU/qtr+fUkcGKORjuSORyRsnPzDzmmTIJpM70u41/XsVOg=="},{"t":"78c323a0552d2dc3","i":"SF1Ee+lPzysgGRWQ","c":"eJ/f24dlUlNPCKrH4HSPztyh2fC2eP7NE3eU8+OCM8YdTUoBjo7gyNwqRT5YDuvEawQU48+YgC4z4g3j8I3QhYxlakoNP/lyAG7kpO5kEHhm7xLnwzHe5OnvTuJDGa7p1LM="},{"t":"e0fd6ae82113e88b","i":"QkFVuFjziIBXuOQp","c":"D39kLVe4n2hk9zNlq9fvZar5pnkHDYaC17pYuEHgc6Xq2B7t5wGWyQ+yziQbC9wQ73xCpvGzdJaQkKGvF/1UZRgqRwY/pxqLaKqj4f1oEwvGHxj+06hKlv84mKXasTn+hb19YnK7Y8tw"},{"t":"70cf037b3d00b990","i":"uhdemP8JW2tw8ccP","c":"c/cWSuBNcWN/QFFXnarRnBy73VHdclPd+fAfyeCjC9EujNbKNXf3CB4Vgb+LXUbFzdtm826vm9ThuK0p7D7O10xjKZGLlfHgrtQsgB/16+R5YXisMbsVJn6qFTjCG+9b9Q=="},{"t":"8c72aed0082724af","i":"RmKoJuEK0XuE9mFs","c":"0/ZbxbICMF/oeSevyOWAWgHlcAfHouiVnkNZse53D3uobKsayZ/tjX/0hAxi3Y3HVbQOYuOU6JUb/O0y6rV9XHoWLm9ce8vKbg5ioz3GBRtKY5JU7BD5K95oSU4+"},{"t":"1b94a3b077a611b4","i":"mcxwpHG4qcenoQxs","c":"kiNmFC5sEztpGFW5W8aS1zoUcxqVAEYyGtKvyfydi8mOcyHDVLFlwwexHT4/vRS/W81T5SsH7Cgr7fudE+mQPTsd4HGNl+fRiYK5LrDTDDYlKCmAKl3RhIA5pOyvKE3BaA=="},{"t":"b1e1757fc27c4021","i":"sho98Cft2V2Mnb0n","c":"pHrOovVAMXwfbE0BoAp+wIYmtZ6wsSR+Q1+hiouooqYNSp9MwG1edcTMX3GfGihi1MJrQ6HQ+YJy4UCv/8RGT/i+8spTGzw1bM1FaOdsVYZUIKep2qLBgP/Gy9amxmaglQ=="},{"t":"934e18b54b7db3c8","i":"k6mNCPa4aemO/Z4T","c":"O0tCWjPPduKQ59OjfAb5nPYFBR58BNuNeFWUVN3IlmkZv7SxutCmn3omK8w+3Czqb2pgzUfXLoT6fLsNXyewfJe408eAOolszJKnnzYO5VME0SGT9e40MeRmJsVZvxY4f4IC2IH2yw=="},{"t":"3386dd2a844410c6","i":"wdc3oxbDDD3ktNv6","c":"YW2gp1/A0Qj4oBtsnWqkAhxoURDTUrQ6KJp0XF73Jqp7VHusqD6xZw4F2dJdGlHd1Byl4FjYVeJiGGz+/wKXBrAbo1+CfLTcQaIzfwzPzwQwViMHIQ2yXWNIY8Jn7R/e1E3iihPD"},{"t":"345cc5ebbff28224","i":"13pWnU8khVXWWYL0","c":"v7t+5RLo/199ID6L04pbGiobUDTVMeiA3+sp8zCeyPsV0NoAyhRImRVPkJ73T1PZuXIkTBqXiwdoYG1UhB85PD1QfDnE+jQ/MYEtA/HWCJGkl66TWhR2aJd+kFWV4iEezUgRBIDCA76/l0UMZkI="},{"t":"08dd3308d977530f","i":"rmfD9iWW0qp1I4hP","c":"evMHUs/tVn//EcS8CY2VUf4kQVVlJwW8Ino/Zv38KGv7BFidMmG3Amq9f8Qobn3gD53ie+SBKtK/rBoHlZXKLyIkoQIdgnTx6cO7dxNeR1kqlqFAZjx3Jqu8Ta0Nnra94w=="},{"t":"4452dfa46c1e8239","i":"NDGZ4KFfyEnUILFV","c":"gOKPtgx5KSi4w3Zf1ZzW37LgN5MRHOTpgNH3VFvft8tv/ytTrSdhRs8qWnsr8YuQ0U+a4JwCrM9ljZ5OlRnWw43NWEWCs0Aby4+UWpzsqbRBxcF0imotTTVBrCke+9fQdRi9/Io="}]};
 
 /* Page wording in the three languages */
 var T = {
@@ -507,7 +553,7 @@ function openDetail(p){
   });
   s1.appendChild(cg); body.appendChild(s1);
   }
-  var s2=el("section"); s2.appendChild(el("h3","d-h",t.why)); var ul=el("ul","points");
+  var s2=el("section"); s2.appendChild(el("h3","d-h",d.whyTitle?d.whyTitle[lang]:t.why)); var ul=el("ul","points");
   d.points.forEach(function(q){ var li=el("li"); li.appendChild(el("b",null,q.h[lang])); li.appendChild(el("span",null,q.p[lang])); ul.appendChild(li); });
   s2.appendChild(ul); body.appendChild(s2);
   var s3=el("section"); s3.appendChild(el("h3","d-h",t.spec)); var tb=el("table","specs");
