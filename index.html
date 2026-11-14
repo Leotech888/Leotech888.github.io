@@ -128,7 +128,8 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .how{margin:56px 0 0;background:var(--tile);border-radius:22px;padding:30px 24px;text-align:center}
 .how h2{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px}
 .how p{color:var(--muted);margin:0 auto;max-width:36em}
-.how .tel{display:inline-block;margin-top:14px;font-size:24px;font-weight:600;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.how .mail{font-size:20px;font-weight:500}
+.how .tel{display:block;width:fit-content;margin:14px auto 0;font-size:24px;font-weight:600;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
 footer{color:var(--muted);font-size:12.5px;text-align:center;padding:28px 0 8px;max-width:46em;margin:0 auto}
 
 /* selection bar */
@@ -181,6 +182,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:28px 0 8px;
   <section class="how">
     <h2 id="howTitle"></h2>
     <p id="howText"></p>
+    <a class="tel mail" id="mail"></a>
     <a class="tel" id="tel"></a>
   </section>
 
@@ -284,40 +286,73 @@ var PRODUCTS = [
       ],
       fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"Actual charging speed depends on your device and charger.",zh:"实际充电速度取决于你的设备和充电头。"}
     } },
+  { id:"cable-apple", cat:"cable", img:"", price:"",
+    name:{fr:"Câble Apple", en:"Apple cable", zh:"苹果数据线"},
+    desc:{fr:"Câble de recharge et de données, 1 m. Au choix : Type-C ou Lightning.", en:"Charging and data cable, 1 m (3 ft). Choose Type-C or Lightning.", zh:"充电加传输数据线，1 米。可选 Type-C 或 Lightning。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
+  { id:"cable-rainbow", cat:"cable", img:"", price:"",
+    name:{fr:"Câble arc-en-ciel tressé", en:"Rainbow braided cable", zh:"彩虹编织线"},
+    desc:{fr:"Câble tressé multicolore, 1 m. Au choix : Type-C ou Lightning.", en:"Multicolour braided cable, 1 m (3 ft). Choose Type-C or Lightning.", zh:"彩色编织线，1 米。可选 Type-C 或 Lightning。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
+  { id:"cable-zinc", cat:"cable", img:"", price:"",
+    name:{fr:"Câble tressé en alliage de zinc", en:"Zinc-alloy braided cable", zh:"彩色锌合金编织线"},
+    desc:{fr:"Câble tressé avec embouts en alliage de zinc, 1 m. Au choix : Type-C ou Lightning.", en:"Braided cable with zinc-alloy ends, 1 m (3 ft). Choose Type-C or Lightning.", zh:"锌合金接头编织线，1 米。可选 Type-C 或 Lightning。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
+  { id:"cable-5in1", cat:"cable", img:"", price:"",
+    name:{fr:"Câble multifonction 5 en 1", en:"5-in-1 cable", zh:"五合一多功能数据线"},
+    desc:{fr:"Un seul câble pour plusieurs appareils, 1,2 m.", en:"One cable for several devices, 1.2 m (4 ft).", zh:"一条线接多种设备，1.2 米。"},
+    options:[] },
+  { id:"cable-stand", cat:"cable", img:"", price:"",
+    name:{fr:"Câble avec support", en:"Stand cable", zh:"桌面立式支架线"},
+    desc:{fr:"Câble USB / Type-C avec support de bureau, 1,5 m.", en:"USB / Type-C cable with a desk stand, 1.5 m (5 ft).", zh:"USB / Type-C 桌面立式支架线，1.5 米。"},
+    options:[] },
+  { id:"cable-3m", cat:"cable", img:"", price:"",
+    name:{fr:"Câble de rallonge 3 m", en:"3 m extension cable", zh:"3 米加长线"},
+    desc:{fr:"Câble long de 3 m pour recharger depuis le lit, le canapé ou le comptoir.", en:"Long 3 m (10 ft) cable to charge from bed, sofa or counter.", zh:"3 米长线，躺床上、坐沙发、站柜台都能充。"},
+    options:[] },
+  { id:"charger-45w", cat:"charger", img:"", price:"",
+    name:{fr:"Bloc de charge rapide 45 W", en:"45W fast charging block", zh:"45W 快充头"},
+    desc:{fr:"Chargeur mural à recharge rapide, 45 W.", en:"Wall charger with 45 W fast charging.", zh:"45W 快充充电头。"},
+    options:[] },
+  { id:"adapter", cat:"ear", img:"", price:"",
+    name:{fr:"Adaptateur audio pour écouteurs", en:"Headphone audio adapter", zh:"耳机转接插头"},
+    desc:{fr:"Adaptateur pour brancher des écouteurs filaires.", en:"Adapter to connect wired earphones.", zh:"用于连接有线耳机的转接头。"},
+    options:[] },
 ];
+var ORDER={cable:0,charger:1,ear:2}; PRODUCTS.sort(function(a,b){return ORDER[a.cat]-ORDER[b.cat]});
 
 /* Member logins and prices, locked. Do not edit by hand. */
-var LOCKED = {"p":{"i":"hBYfZFiUpAbtWOfJ","c":"TTywunkH0PrGjE01k8WMLNS8t5oUbdff1gLfBPNFZeaL8vdV"},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"4cd5b27069d7d14c","i":"zqzpgZ50SQUVm4oF","c":"w7zyQlGe3exihYcTewvgPK2dPBCvbemEiLuIbvn29aWVJtkyPvQt/z4wLHjCmBzr1w6M2DFZjGT3I5V1I1zM4RiS9xqcjEK7Ts7fsVK+8a6RpghGE2hoai/0v/8sAU4E4ToLiw=="}]};
+var LOCKED = {"p":{"i":"G5Kx5Gssvk39r+pr","c":"MWay241VM299I2LX2nbSOIZFUUEGZQSe+jdgahArGQ4q8APia4IoW+W8ohEDJ+npzJuLE5CDr2nMQQ3+biltxGbN5bJNymFgJGyGeTrars+n6NKT3dQQe2RYHEpG3/e8ZzaPQDVu/VT8rfYOhmQR9lggwB9k6CLF6jb4N74qCXmgnHHK2JOJ2BKNl+S/+1y9xnN6MFC0xNvibMxoYwEDmiYCUvZGR8ancNk5FUMhh8TsKi/5OuPj2apyWgTOTwClC0c60Ec9jvXOCrzjvjeS9ny1wWOE4YtUhYaEEu2Ra0tq7PPoHcN88A=="},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"4cd5b27069d7d14c","i":"bn0OhWhQn9RV9s4C","c":"/SIfEFCR1RWHQgsXR+D659C83/F5TPTXcZWsLmcUY4hlZXkEV5xJGyzR20sRFMUgQojscnnGIDWy97DnSULL7/RSZAF9mwVKm9bgQOSfyj/av3gEtfK/KjSznvFMBtpKSKB8lTmuxg=="},{"t":"f00dce2cc66e753e","i":"qMVdFfOf00SUDzqQ","c":"3EkMa6n7LvBZLF2ywEL8/N36+93HUEfgjsl/m9JwQ3Nr6Mg5PfHpBk9JV+8jdA8PPZzBDKv/hdBiKplPQILeLNHS9xiqwJ4jRU6CSjo5xAciNjJibTZX5ZyLUasNhcI="},{"t":"699ff3ccf5b18011","i":"zVbl7jN4PmTBzkgB","c":"PrBSNmG0LFPwtoi/OCqyYU6TqkfRV7ktgN8sJPxEFNflGhux8Ce982gPOoreZzbR2bDOJ4YYPwDU2C4j6XyloNIPhmbXg7LP+7vzLwHYfXXk6y3Dapj6pTTU9zvnTOCZ49EX1dKxUGs="},{"t":"75c8fb45d4f09454","i":"9WeveuS67w4Z1tEv","c":"bLoQnvEvIHQ4vB1OxCd22lmDZcs8jegYhgYUMpbDzN981WasUZkFPiGZw+uXccDVd5aYQbcvpsRtEIc6B09+SoKhplbzaHwk1QWKuut2b/kuduRKVLWgHxSI5r8Er9DE"},{"t":"21e9ed0feb25d863","i":"n4Mitxn16aAa60Pk","c":"gt9fLonLQONomcqFL5PpvA1WWcLhVSr3hzAd50CEzrWwuqtoPSf91ydok4HQBn/39Of7iCBn2prDJWjk423f3Wt+zOjzqU/qtr+fUkcGKORjuSORyRsnPzDzmmTIJpM70u41/XsVOg=="},{"t":"78c323a0552d2dc3","i":"SF1Ee+lPzysgGRWQ","c":"eJ/f24dlUlNPCKrH4HSPztyh2fC2eP7NE3eU8+OCM8YdTUoBjo7gyNwqRT5YDuvEawQU48+YgC4z4g3j8I3QhYxlakoNP/lyAG7kpO5kEHhm7xLnwzHe5OnvTuJDGa7p1LM="},{"t":"e0fd6ae82113e88b","i":"QkFVuFjziIBXuOQp","c":"D39kLVe4n2hk9zNlq9fvZar5pnkHDYaC17pYuEHgc6Xq2B7t5wGWyQ+yziQbC9wQ73xCpvGzdJaQkKGvF/1UZRgqRwY/pxqLaKqj4f1oEwvGHxj+06hKlv84mKXasTn+hb19YnK7Y8tw"},{"t":"70cf037b3d00b990","i":"uhdemP8JW2tw8ccP","c":"c/cWSuBNcWN/QFFXnarRnBy73VHdclPd+fAfyeCjC9EujNbKNXf3CB4Vgb+LXUbFzdtm826vm9ThuK0p7D7O10xjKZGLlfHgrtQsgB/16+R5YXisMbsVJn6qFTjCG+9b9Q=="},{"t":"8c72aed0082724af","i":"RmKoJuEK0XuE9mFs","c":"0/ZbxbICMF/oeSevyOWAWgHlcAfHouiVnkNZse53D3uobKsayZ/tjX/0hAxi3Y3HVbQOYuOU6JUb/O0y6rV9XHoWLm9ce8vKbg5ioz3GBRtKY5JU7BD5K95oSU4+"},{"t":"1b94a3b077a611b4","i":"mcxwpHG4qcenoQxs","c":"kiNmFC5sEztpGFW5W8aS1zoUcxqVAEYyGtKvyfydi8mOcyHDVLFlwwexHT4/vRS/W81T5SsH7Cgr7fudE+mQPTsd4HGNl+fRiYK5LrDTDDYlKCmAKl3RhIA5pOyvKE3BaA=="},{"t":"b1e1757fc27c4021","i":"sho98Cft2V2Mnb0n","c":"pHrOovVAMXwfbE0BoAp+wIYmtZ6wsSR+Q1+hiouooqYNSp9MwG1edcTMX3GfGihi1MJrQ6HQ+YJy4UCv/8RGT/i+8spTGzw1bM1FaOdsVYZUIKep2qLBgP/Gy9amxmaglQ=="},{"t":"934e18b54b7db3c8","i":"k6mNCPa4aemO/Z4T","c":"O0tCWjPPduKQ59OjfAb5nPYFBR58BNuNeFWUVN3IlmkZv7SxutCmn3omK8w+3Czqb2pgzUfXLoT6fLsNXyewfJe408eAOolszJKnnzYO5VME0SGT9e40MeRmJsVZvxY4f4IC2IH2yw=="},{"t":"3386dd2a844410c6","i":"wdc3oxbDDD3ktNv6","c":"YW2gp1/A0Qj4oBtsnWqkAhxoURDTUrQ6KJp0XF73Jqp7VHusqD6xZw4F2dJdGlHd1Byl4FjYVeJiGGz+/wKXBrAbo1+CfLTcQaIzfwzPzwQwViMHIQ2yXWNIY8Jn7R/e1E3iihPD"},{"t":"345cc5ebbff28224","i":"13pWnU8khVXWWYL0","c":"v7t+5RLo/199ID6L04pbGiobUDTVMeiA3+sp8zCeyPsV0NoAyhRImRVPkJ73T1PZuXIkTBqXiwdoYG1UhB85PD1QfDnE+jQ/MYEtA/HWCJGkl66TWhR2aJd+kFWV4iEezUgRBIDCA76/l0UMZkI="},{"t":"08dd3308d977530f","i":"rmfD9iWW0qp1I4hP","c":"evMHUs/tVn//EcS8CY2VUf4kQVVlJwW8Ino/Zv38KGv7BFidMmG3Amq9f8Qobn3gD53ie+SBKtK/rBoHlZXKLyIkoQIdgnTx6cO7dxNeR1kqlqFAZjx3Jqu8Ta0Nnra94w=="}]};
 
 /* Page wording in the three languages */
 var T = {
   fr:{ hero:"Choisissez votre modèle.", heroText:"Câbles, chargeurs et écouteurs pour commerces partenaires. Connectez-vous pour voir les prix et passer votre commande.",
-       all:"Tout", ear:"Écouteurs", cable:"Câbles", charger:"Chargeurs", add:"Ajouter", added:"Ajouté",
+       soon:"Photo à venir", sample:"Exemple", all:"Tout", ear:"Écouteurs", cable:"Câbles", charger:"Chargeurs", add:"Ajouter", added:"Ajouté",
        ask:"Prix : demandez-nous", lockTxt:"Prix réservé aux membres", more:"Voir les détails", close:"Fermer", ways:"Quatre branchements", why:"Pourquoi ce câble", spec:"Fiche technique", login:"Espace membre", logout:"Déconnexion", mTitle:"Espace membre", mText:"Les prix et la commande en ligne sont réservés aux commerces partenaires. Entrez votre code membre.", mLabel:"Code membre", mGo:"Se connecter", mBad:"Ce code n'est pas valide. Vérifiez-le et réessayez.", mJoin:"Pas encore partenaire ? Appelez ou textez le "+SHOP.phone+".",
        order0:"Ma commande est vide", order:function(n){return "Ma commande : "+n+(n>1?" articles":" article")}, total:"Total", orderHead:"Commande", send:"Envoyer par texto", sendMail:"Envoyer la commande par courriel", sendAuto:"Envoyer la commande", sending:"Envoi en cours…", done:"Commande envoyée. Merci ! Nous vous confirmerons la livraison.", fail:"L'envoi n'a pas fonctionné. Réessayez, ou utilisez le bouton courriel.", each:"l'unité", noPrice:"prix à confirmer", sent:"Appuyez sur Envoyer dans l'application qui s'ouvre. Si rien ne s'ouvre, utilisez « Copier » et envoyez le texte au "+SHOP.phone+" ou à "+SHOP.email+".",
        tray0:"Ma sélection est vide", tray:function(n){return "Ma sélection : "+n+(n>1?" articles":" article")},
        show:"Voir", hide:"Masquer", clear:"Vider", copy:"Copier ma sélection", copied:"Sélection copiée. Collez-la dans un message texte au "+SHOP.phone+".",
        copyFail:"La copie n'a pas fonctionné. Appelez ou textez le "+SHOP.phone+" et dites-nous ce que vous avez choisi.",
-       howTitle:"Comment commander", howText:"Ajoutez vos articles, copiez votre sélection, puis envoyez-la par message texte. Nous confirmons le prix et la disponibilité.",
-       foot:"Boutique indépendante d'accessoires. Les noms de connecteurs servent uniquement à indiquer la compatibilité. Aucune affiliation avec les fabricants d'appareils.", hello:"Bonjour, voici ma sélection :" },
+       howTitle:"Comment commander", howText:"Connectez-vous avec votre code membre, ajoutez vos articles et appuyez sur « Envoyer la commande ». Nous confirmons la livraison.",
+       foot:"Grossiste indépendant d'accessoires. Les noms de connecteurs servent uniquement à indiquer la compatibilité. Aucune affiliation avec les fabricants d'appareils.", hello:"Bonjour, voici ma sélection :" },
   en:{ hero:"Pick your model.", heroText:"Cables, chargers and earphones for partner stores. Log in to see prices and place your order.",
-       all:"All", ear:"Earphones", cable:"Cables", charger:"Chargers", add:"Add", added:"Added",
+       soon:"Photo coming soon", sample:"Example", all:"All", ear:"Earphones", cable:"Cables", charger:"Chargers", add:"Add", added:"Added",
        ask:"Price: ask us", lockTxt:"Members-only price", more:"See details", close:"Close", ways:"Four ways to plug in", why:"Why this cable", spec:"Specifications", login:"Member login", logout:"Log out", mTitle:"Member login", mText:"Prices and online ordering are reserved for partner stores. Enter your member code.", mLabel:"Member code", mGo:"Log in", mBad:"That code is not valid. Check it and try again.", mJoin:"Not a partner yet? Call or text "+SHOP.phone+".",
        order0:"My order is empty", order:function(n){return "My order: "+n+(n>1?" items":" item")}, total:"Total", orderHead:"Order", send:"Send by text", sendMail:"Send order by email", sendAuto:"Send order", sending:"Sending…", done:"Order sent. Thank you! We will confirm delivery.", fail:"Sending did not work. Try again, or use the email button.", each:"each", noPrice:"price to confirm", sent:"Tap Send in the app that opens. If nothing opens, use Copy and send the text to "+SHOP.phone+" or "+SHOP.email+".",
        tray0:"My selection is empty", tray:function(n){return "My selection: "+n+(n>1?" items":" item")},
        show:"Show", hide:"Hide", clear:"Clear", copy:"Copy my selection", copied:"Selection copied. Paste it into a text message to "+SHOP.phone+".",
        copyFail:"Copying did not work. Call or text "+SHOP.phone+" and tell us what you picked.",
-       howTitle:"How to order", howText:"Add your items, copy your selection, then send it by text message. We confirm the price and availability.",
-       foot:"Independent accessories shop. Connector names are used only to show compatibility. Not affiliated with any device maker.", hello:"Hello, here is my selection:" },
+       howTitle:"How to order", howText:"Log in with your member code, add your items and tap “Send order”. We will confirm delivery.",
+       foot:"Independent accessories wholesaler. Connector names are used only to show compatibility. Not affiliated with any device maker.", hello:"Hello, here is my selection:" },
   zh:{ hero:"选一款适合你的。", heroText:"面向合作店铺的数据线、充电头、耳机目录。登录后查看价格并下单。",
-       all:"全部", ear:"耳机", cable:"数据线", charger:"充电头", add:"加入", added:"已加入",
+       soon:"照片即将上传", sample:"示例", all:"全部", ear:"耳机", cable:"数据线", charger:"充电头", add:"加入", added:"已加入",
        ask:"价格：请联系我们", lockTxt:"会员可见价格", more:"查看详情", close:"关闭", ways:"四种接法", why:"为什么选这条线", spec:"规格参数", login:"会员登录", logout:"退出", mTitle:"会员登录", mText:"价格和在线订货仅对合作店铺开放。请输入会员码。", mLabel:"会员码", mGo:"登录", mBad:"会员码不正确，请检查后再试。", mJoin:"还不是合作店铺？请致电或发短信到 "+SHOP.phone+"。",
        order0:"订货单是空的", order:function(n){return "我的订货单："+n+" 件"}, total:"合计", orderHead:"订货单", send:"短信发送订单", sendMail:"邮件发送订单", sendAuto:"提交订单", sending:"正在发送…", done:"订单已发送，谢谢！我们会跟你确认送货。", fail:"发送没有成功。请再试一次，或使用邮件按钮。", each:"每件", noPrice:"价格待确认", sent:"请在打开的应用里点发送。如果没有打开，请点“复制”，把内容发到 "+SHOP.phone+" 或 "+SHOP.email+"。",
        tray0:"我的清单是空的", tray:function(n){return "我的清单："+n+" 件"},
        show:"查看", hide:"收起", clear:"清空", copy:"复制我的清单", copied:"清单已复制，粘贴到短信发给 "+SHOP.phone+" 即可。",
        copyFail:"复制没有成功。请直接打电话或发短信到 "+SHOP.phone+"，告诉我们你选了什么。",
-       howTitle:"怎么下单", howText:"把想要的产品加入清单，复制清单，用短信发给我们。我们会确认价格和库存。",
-       foot:"独立配件小店。接口名称仅用于说明兼容性，与任何设备厂商无关联。", hello:"你好，这是我选的：" }
+       howTitle:"怎么下单", howText:"用会员码登录，把要的产品加入订货单，点“提交订单”。我们会跟你确认送货。",
+       foot:"独立配件批发商。接口名称仅用于说明兼容性，与任何设备厂商无关联。", hello:"你好，这是我选的：" }
 };
 
 /* ===================== page logic (no need to edit) ===================== */
@@ -385,7 +420,7 @@ function render(){
   $("mTitle").textContent=t.mTitle; $("mText").textContent=t.mText; $("mLabel").textContent=t.mLabel; $("mGo").textContent=t.mGo; $("mJoin").textContent=t.mJoin;
   $("heroTitle").textContent=t.hero; $("heroText").textContent=t.heroText;
   $("howTitle").textContent=t.howTitle; $("howText").textContent=t.howText;
-  $("tel").textContent=SHOP.phone; $("tel").href="tel:"+SHOP.phone.replace(/\D/g,"");
+  $("mail").textContent=SHOP.email; $("mail").href="mailto:"+SHOP.email; $("tel").textContent=SHOP.phone; $("tel").href="tel:"+SHOP.phone.replace(/\D/g,"");
   $("foot").textContent="© "+SHOP.name+". "+t.foot;
   document.querySelectorAll(".langs button").forEach(function(b){b.setAttribute("aria-pressed", b.dataset.lang===lang)});
 
@@ -478,9 +513,9 @@ function lineText(c){
 function orderTotal(){ var s=0; cart.forEach(function(c){ if(PRICES&&PRICES[c.id]!=null) s+=PRICES[c.id]*c.qty }); return s; }
 function orderText(){
   var t=T[lang], d=new Date().toISOString().slice(0,10);
-  if(!PRICES) return t.hello+"\n"+cart.map(function(c){var L=lineText(c); return "• "+c.qty+" × "+L.name+" ("+L.opts+")"}).join("\n");
+  if(!PRICES) return t.hello+"\n"+cart.map(function(c){var L=lineText(c); return "• "+c.qty+" × "+L.name+(L.opts?" ("+L.opts+")":"")}).join("\n");
   return t.orderHead+" · "+MEMBER+" · "+d+"\n"+cart.map(function(c){ var L=lineText(c), pr=PRICES[c.id];
-    return "• "+c.qty+" × "+L.name+" ("+L.opts+")"+(pr!=null ? " @ "+fmt(pr)+" = "+fmt(pr*c.qty) : " ("+t.noPrice+")") }).join("\n")+"\n"+t.total+" : "+fmt(orderTotal());
+    return "• "+c.qty+" × "+L.name+(L.opts?" ("+L.opts+")":"")+(pr!=null ? " @ "+fmt(pr)+" = "+fmt(pr*c.qty) : " ("+t.noPrice+")") }).join("\n")+"\n"+t.total+" : "+fmt(orderTotal());
 }
 function renderTray(){
   var t=T[lang], n=cart.reduce(function(s,c){return s+c.qty},0);
@@ -488,7 +523,7 @@ function renderTray(){
   $("toggle").textContent = open ? t.hide : t.show; $("clear").textContent=t.clear; $("copy").textContent=PRICES ? t.copy.split(" ")[0] : t.copy;
   $("toggle").disabled=$("clear").disabled=$("copy").disabled=!n;
   var sm=$("sendMail"), sa=$("sendAuto"); sm.textContent=t.sendMail; if(!sending) sa.textContent=t.sendAuto;
-  sa.hidden=!(PRICES&&n&&SHOP.formKey); sm.hidden=!(PRICES&&n&&(!SHOP.formKey||mailFallback));
+  sa.hidden=!(PRICES&&n&&SHOP.formKey); $("copy").hidden=!!(PRICES&&SHOP.formKey); sm.hidden=!(PRICES&&n&&(!SHOP.formKey||mailFallback));
   if(PRICES&&n){ var body=encodeURIComponent(orderText());
     sm.href="mailto:"+SHOP.email+"?subject="+encodeURIComponent(t.orderHead+" · "+MEMBER+" · "+fmt(orderTotal()))+"&body="+body; }
   var list=$("list"); list.textContent=""; list.hidden=!(open&&n);
@@ -497,7 +532,7 @@ function renderTray(){
   cart.forEach(function(c,idx){
     var L=lineText(c), li=el("li"), left=el("div"), pr=PRICES?PRICES[c.id]:null;
     left.appendChild(document.createTextNode(L.name));
-    left.appendChild(el("small",null,L.opts+(PRICES ? " · "+(pr!=null ? fmt(pr)+" "+t.each+" = "+fmt(pr*c.qty) : t.noPrice) : "")));
+    left.appendChild(el("small",null,L.opts+(PRICES ? (L.opts?" · ":"")+(pr!=null ? fmt(pr)+" "+t.each+" = "+fmt(pr*c.qty) : t.noPrice) : "")));
     var q=el("div","qty"), minus=el("button",null,"−"), plus=el("button",null,"+"), inp=el("input");
     minus.type=plus.type="button"; minus.setAttribute("aria-label","−1"); plus.setAttribute("aria-label","+1");
     inp.type="number"; inp.min="1"; inp.value=c.qty; inp.id="qty-"+idx; inp.setAttribute("aria-label",L.name); inp.inputMode="numeric";
