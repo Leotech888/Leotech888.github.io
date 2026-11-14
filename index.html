@@ -286,10 +286,29 @@ var PRODUCTS = [
       ],
       fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"Actual charging speed depends on your device and charger.",zh:"实际充电速度取决于你的设备和充电头。"}
     } },
-  { id:"cable-apple", cat:"cable", img:"", price:"",
+  { id:"cable-apple", cat:"cable", img:"apple-blanc.jpg",
+    imgs:["apple-blanc.jpg","apple-orange.jpg","apple-bordeaux.jpg"],
     name:{fr:"Câble Apple", en:"Apple cable", zh:"苹果数据线"},
-    desc:{fr:"Câble de recharge et de données, 1 m. Au choix : Type-C ou Lightning.", en:"Charging and data cable, 1 m (3 ft). Choose Type-C or Lightning.", zh:"充电加传输数据线，1 米。可选 Type-C 或 Lightning。"},
-    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
+    desc:{fr:"USB-C vers USB-C, 1 m. Offert en blanc, orange et bordeaux.", en:"USB-C to USB-C, 1 m (3 ft). Available in white, orange and burgundy.", zh:"USB-C 对 USB-C，1 米。有白色、橙色、酒红色。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}, {fr:"Orange",en:"Orange",zh:"橙色"}, {fr:"Bordeaux",en:"Burgundy",zh:"酒红色"}]} ],
+    detail:{
+      video:"apple-cable-usbc.mp4", poster:"apple-cable-usbc-poster.jpg", portrait:true,
+      gallery:["apple-blanc.jpg","apple-bordeaux.jpg","apple-orange.jpg","apple-blanc-main.jpg","apple-blanc-lot.jpg"],
+      lead:{fr:"Un câble tressé USB-C vers USB-C, enroulé et prêt à vendre. Choisissez la couleur au moment de commander.", en:"A braided USB-C to USB-C cable, coiled and ready to sell. Pick the colour when you order.", zh:"USB-C 对 USB-C 编织线，已卷好、可直接上架。下单时选颜色。"},
+      points:[
+        {h:{fr:"Trois couleurs",en:"Three colours",zh:"三种颜色"}, p:{fr:"Blanc, orange et bordeaux. Chaque commande indique la couleur choisie.",en:"White, orange and burgundy. Each order line shows the colour you picked.",zh:"白色、橙色、酒红色，订单里会标明你选的颜色。"}},
+        {h:{fr:"USB-C aux deux bouts",en:"USB-C on both ends",zh:"两头都是 USB-C"}, p:{fr:"Pour les appareils munis d'un port USB-C.",en:"For devices with a USB-C port.",zh:"适用于带 USB-C 接口的设备。"}},
+        {h:{fr:"Prêt pour le comptoir",en:"Counter-ready",zh:"包装好，可直接摆"}, p:{fr:"Enroulé sur un carton, avec un outil d'éjection de carte SIM inclus.",en:"Coiled on a card, with a SIM-tray ejector tool included.",zh:"卷在卡纸上，附赠取卡针。"}}
+      ],
+      specs:[
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1 m (3 pi)",en:"1 m (3 ft)",zh:"1 米（3 英尺）"}],
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-C aux deux bouts",en:"USB-C on both ends",zh:"两头 USB-C"}],
+        [{fr:"Gaine",en:"Jacket",zh:"线身"}, {fr:"Tressée",en:"Braided",zh:"编织"}],
+        [{fr:"Couleurs",en:"Colours",zh:"颜色"}, {fr:"Blanc, orange, bordeaux",en:"White, orange, burgundy",zh:"白色、橙色、酒红色"}],
+        [{fr:"Inclus",en:"Included",zh:"附带"}, {fr:"Outil d'éjection de carte SIM",en:"SIM-tray ejector tool",zh:"取卡针"}]
+      ],
+      fine:{fr:"Les couleurs peuvent varier légèrement selon l'écran.",en:"Colours may look slightly different on your screen.",zh:"颜色在不同屏幕上可能略有差别。"}
+    } },
   { id:"cable-rainbow", cat:"cable", img:"", price:"",
     name:{fr:"Câble arc-en-ciel tressé", en:"Rainbow braided cable", zh:"彩虹编织线"},
     desc:{fr:"Câble tressé multicolore, 1 m. Au choix : Type-C ou Lightning.", en:"Multicolour braided cable, 1 m (3 ft). Choose Type-C or Lightning.", zh:"彩色编织线，1 米。可选 Type-C 或 Lightning。"},
@@ -434,7 +453,8 @@ function render(){
   PRODUCTS.filter(function(p){return cat==="all"||p.cat===cat}).forEach(function(p){
     var card=el("article","card");
     var ph=el("div","photo");
-    if(p.img){ var im=el("img"); im.src=p.img; im.alt=p.name[lang]; im.loading="lazy"; ph.appendChild(im); }
+    var psrc=p.imgs?p.imgs[picks[p.id][0]]:p.img;
+    if(psrc){ var im=el("img"); im.src=psrc; im.alt=p.name[lang]; im.loading="lazy"; ph.appendChild(im); }
     else { ph.innerHTML=ICON[p.cat]; ph.setAttribute("aria-label",t.soon); }
     if(p.sample) ph.appendChild(el("span","tag",t.sample));
     card.appendChild(ph);
@@ -473,11 +493,12 @@ function openDetail(p){
   top.appendChild(h); top.appendChild(x); body.appendChild(top);
   body.appendChild(el("p","d-lead",d.lead[lang]));
   var dp=el("div","d-price"); dp.appendChild(priceNode(p)); body.appendChild(dp);
-  if(d.video){ var vb=el("div","d-video"), v=el("video"); v.src=d.video; if(d.poster)v.poster=d.poster;
+  if(d.video){ var vb=el("div","d-video"), v=el("video"); if(d.portrait){ vb.style.aspectRatio="9/16"; vb.style.maxWidth="340px"; vb.style.margin="0 auto"; } v.src=d.video; if(d.poster)v.poster=d.poster;
     v.controls=true; v.playsInline=true; v.setAttribute("playsinline",""); v.preload="metadata"; vb.appendChild(v); body.appendChild(vb); }
   if(d.gallery){ var g=el("div","gal");
     d.gallery.forEach(function(src,i){ var im=el("img"); im.src=src; im.alt=p.name[lang]+" "+(i+1); var zb=el("button"); zb.type="button"; zb.onclick=function(){openZoom(d.gallery,i)}; zb.appendChild(im); g.appendChild(zb); }); body.appendChild(g); }
   else if(p.img){ var ph=el("div","d-photo"), im2=el("img"); im2.src=p.img; im2.alt=p.name[lang]; ph.appendChild(im2); body.appendChild(ph); }
+  if(d.combos){
   var s1=el("section"); s1.appendChild(el("h3","d-h",t.ways)); var cg=el("div","combos");
   d.combos.forEach(function(c){
     var box=el("div","combo"), pl=el("div","plug");
@@ -485,6 +506,7 @@ function openDetail(p){
     box.appendChild(pl); box.appendChild(el("b",null,c.t)); box.appendChild(el("small",null,c.n[lang])); cg.appendChild(box);
   });
   s1.appendChild(cg); body.appendChild(s1);
+  }
   var s2=el("section"); s2.appendChild(el("h3","d-h",t.why)); var ul=el("ul","points");
   d.points.forEach(function(q){ var li=el("li"); li.appendChild(el("b",null,q.h[lang])); li.appendChild(el("span",null,q.p[lang])); ul.appendChild(li); });
   s2.appendChild(ul); body.appendChild(s2);
