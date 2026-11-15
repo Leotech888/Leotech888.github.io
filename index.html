@@ -318,7 +318,7 @@ var PRODUCTS = [
     options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}, {fr:"Orange",en:"Orange",zh:"橙色"}, {fr:"Bordeaux",en:"Burgundy",zh:"酒红色"}]} ],
     detail:{
       video:"apple-cable-usbc.mp4", poster:"apple-cable-usbc-poster.jpg", portrait:true,
-      gallery:["apple-blanc.jpg","apple-bordeaux.jpg","apple-orange.jpg","apple-blanc-main.jpg","apple-blanc-lot.jpg"],
+      gallery:["apple-blanc.jpg","apple-bordeaux.jpg","apple-orange.jpg"],
       lead:{fr:"Un câble tressé USB-C vers USB-C qui prend en charge la recharge rapide et le transfert de données. Choisissez la couleur au moment de commander.", en:"A braided USB-C to USB-C cable that supports fast charging and data transfer. Pick the colour when you order.", zh:"USB-C 对 USB-C 编织线，支持快充和数据传输。下单时选颜色。"},
       points:[
         {h:{fr:"Recharge rapide et données",en:"Fast charging and data",zh:"快充加数据传输"}, p:{fr:"Prend en charge la recharge rapide et le transfert de données.",en:"Supports fast charging and data transfer.",zh:"支持快速充电，也能传输数据。"}},
@@ -344,10 +344,29 @@ var PRODUCTS = [
     name:{fr:"Câble tressé en alliage de zinc", en:"Zinc-alloy braided cable", zh:"彩色锌合金编织线"},
     desc:{fr:"Câble tressé avec embouts en alliage de zinc, 1 m. Au choix : Type-C ou Lightning.", en:"Braided cable with zinc-alloy ends, 1 m (3 ft). Choose Type-C or Lightning.", zh:"锌合金接头编织线，1 米。可选 Type-C 或 Lightning。"},
     options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
-  { id:"cable-5in1", cat:"cable", img:"", price:"",
+  { id:"cable-5in1", cat:"cable", img:"cable-5in1.jpg", price:"",
     name:{fr:"Câble multifonction 5 en 1", en:"5-in-1 cable", zh:"五合一多功能数据线"},
-    desc:{fr:"Un seul câble pour plusieurs appareils, 1,2 m.", en:"One cable for several devices, 1.2 m (4 ft).", zh:"一条线接多种设备，1.2 米。"},
-    options:[] },
+    desc:{fr:"Câble de recharge rapide (ce n'est pas un chargeur). Type-C, Lightning et Micro-USB, 1,2 m.", en:"Fast-charging cable (not a charger). Type-C, Lightning and Micro-USB, 1.2 m (4 ft).", zh:"这是快充线，不是快充头。Type-C、Lightning、Micro-USB 三个接头，1.2 米。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Noir",en:"Black",zh:"黑色"}]} ],
+    detail:{
+      video:"cable-5in1.mp4", poster:"cable-5in1-poster.jpg",
+      gallery:["cable-5in1.jpg","cable-5in1-g1.jpg"],
+      lead:{fr:"Un câble tressé noir avec trois embouts de sortie (Type-C, Lightning, Micro-USB) et un adaptateur USB-A amovible. C'est un câble de recharge rapide, pas un chargeur : il faut un chargeur compatible.", en:"A black braided cable with three output heads (Type-C, Lightning, Micro-USB) and a removable USB-A adapter. This is a fast-charging cable, not a charger: you need a compatible charger.", zh:"黑色编织线，三个输出接头（Type-C、Lightning、Micro-USB），另带可拆的 USB-A 转接头。这是快充线，不是快充头，需要搭配支持快充的充电头使用。"},
+      points:[
+        {h:{fr:"Câble de recharge rapide",en:"Fast-charging cable",zh:"快充线"}, p:{fr:"Prend en charge la recharge rapide. Ce n'est pas un chargeur : utilisez un chargeur compatible.",en:"Supports fast charging. It is not a charger: use a compatible charger.",zh:"支持快充。这是线，不是充电头，要配支持快充的充电头。"}},
+        {h:{fr:"Trois embouts de sortie",en:"Three output heads",zh:"三个输出接头"}, p:{fr:"Type-C, Lightning et Micro-USB : un seul câble pour plusieurs appareils.",en:"Type-C, Lightning and Micro-USB: one cable for several devices.",zh:"Type-C、Lightning、Micro-USB，一条线接多种设备。"}},
+        {h:{fr:"Tressé et facile à ranger",en:"Braided and easy to pack",zh:"编织耐用，好收纳"}, p:{fr:"Gaine en nylon tressé, avec attache auto-agrippante pour l'enrouler proprement.",en:"Braided nylon jacket, with a hook-and-loop strap to keep it coiled.",zh:"尼龙编织外皮，自带魔术贴绑带，卷起来不散。"}}
+      ],
+      specs:[
+        [{fr:"Type de produit",en:"Product type",zh:"产品类型"}, {fr:"Câble de recharge rapide (pas un chargeur)",en:"Fast-charging cable (not a charger)",zh:"快充线（不是快充头）"}],
+        [{fr:"Embouts de sortie",en:"Output heads",zh:"输出接头"}, {fr:"Type-C, Lightning, Micro-USB",en:"Type-C, Lightning, Micro-USB",zh:"Type-C、Lightning、Micro-USB"}],
+        [{fr:"Côté entrée",en:"Input end",zh:"输入端"}, {fr:"Type-C, avec adaptateur USB-A amovible",en:"Type-C, with removable USB-A adapter",zh:"Type-C，附可拆 USB-A 转接头"}],
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1,2 m (4 pi)",en:"1.2 m (4 ft)",zh:"1.2 米（4 英尺）"}],
+        [{fr:"Matériau",en:"Material",zh:"材质"}, {fr:"Nylon tressé",en:"Braided nylon",zh:"尼龙编织"}],
+        [{fr:"Couleur",en:"Colour",zh:"颜色"}, {fr:"Noir",en:"Black",zh:"黑色"}]
+      ],
+      fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"Actual charging speed depends on your device and charger.",zh:"实际充电速度取决于你的设备和充电头。"}
+    } },
   { id:"cable-stand", cat:"cable", img:"", price:"",
     name:{fr:"Câble avec support", en:"Stand cable", zh:"桌面立式支架线"},
     desc:{fr:"Câble USB / Type-C avec support de bureau, 1,5 m.", en:"USB / Type-C cable with a desk stand, 1.5 m (5 ft).", zh:"USB / Type-C 桌面立式支架线，1.5 米。"},
@@ -363,7 +382,7 @@ var PRODUCTS = [
     detail:{
       whyTitle:{fr:"Pourquoi ce chargeur",en:"Why this charger",zh:"为什么选这个充电头"},
       video:"charger-45w.mp4", poster:"charger-45w-poster.jpg", portrait:true,
-      gallery:["charger-45w-front.jpg","charger-45w-ports.jpg","charger-45w-label.jpg"],
+      gallery:["charger-45w-front.jpg","charger-45w-plug.jpg","charger-45w-ports2.jpg","charger-45w-label.jpg"],
       lead:{fr:"Un seul chargeur pour le téléphone et l'ordinateur portable. Recharge rapide, avec un port USB-C et un port USB-A.", en:"One charger for your phone and your laptop. Fast charging, with one USB-C and one USB-A port.", zh:"一个充电头，手机和笔记本电脑都能充，支持快充。一个 USB-C 口，一个 USB-A 口。"},
       points:[
         {h:{fr:"Téléphone et ordinateur portable",en:"Phone and laptop",zh:"手机和笔记本都能充"}, p:{fr:"Assez puissant pour recharger rapidement un téléphone comme un ordinateur portable.",en:"Powerful enough to fast-charge a phone as well as a laptop.",zh:"功率足够，手机和笔记本电脑都能快充。"}},
