@@ -245,14 +245,31 @@ var SHOP = {
    Prices are NOT written here. They are stored locked (encrypted) in LOCKED below
    and only appear after a store logs in with its username and password. */
 var PRODUCTS = [
-  { id:"ear-a", cat:"ear", img:"ecouteurs-lightning-a.jpg", price:"",
-    name:{fr:"Écouteurs filaires Lightning", en:"Lightning wired earphones", zh:"Lightning 有线耳机"},
-    desc:{fr:"Micro et télécommande sur le fil. Se branche directement sur le port Lightning.", en:"In-line mic and remote. Plugs straight into a Lightning port.", zh:"带线控和麦克风，直接插 Lightning 接口。"},
-    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
-  { id:"ear-b", cat:"ear", img:"ecouteurs-lightning-b.jpg", price:"",
-    name:{fr:"Écouteurs filaires Lightning, en boîtier", en:"Lightning wired earphones, boxed", zh:"Lightning 有线耳机（盒装）"},
-    desc:{fr:"Présentés dans un boîtier de rangement. Micro et télécommande sur le fil.", en:"Packed in a storage tray. In-line mic and remote.", zh:"带收纳托盘包装，线控加麦克风。"},
-    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Blanc",en:"White",zh:"白色"}]} ] },
+  { id:"ear-b", cat:"ear", img:"earbuds-typec-a.jpg", price:"",
+    imgs:["earbuds-typec-a.jpg","earbuds-lightning-1.jpg"],
+    name:{fr:"Écouteurs filaires", en:"Wired earphones", zh:"有线耳机"},
+    desc:{fr:"Micro et télécommande sur le fil, très bon son. Au choix : USB-C ou Lightning. Livrés en boîte avec étui.", en:"In-line mic and remote, very good sound. Choose USB-C or Lightning. Boxed, with a storage tray.", zh:"带麦克风和线控，音质很好。可选 Type-C 或 Lightning 接口，盒装带收纳托盘。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"USB-C",en:"USB-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ],
+    detail:{
+      whyTitle:{fr:"Pourquoi ces écouteurs",en:"Why these earphones",zh:"为什么选这款耳机"},
+      galleries:[ ["earbuds-typec-a.jpg","earbuds-typec-b.jpg","earbuds-typec-c.jpg"], ["earbuds-lightning-1.jpg","earbuds-lightning-2.jpg","earbuds-lightning-3.jpg"] ],
+      lead:{fr:"Des écouteurs filaires avec micro et télécommande sur le fil, et un très bon son. On les branche et on écoute, sans pile ni appairage. Choisissez le connecteur (USB-C ou Lightning) au moment de commander.", en:"Wired earphones with an in-line mic and remote, and very good sound. Plug in and listen, no battery and no pairing. Choose the connector (USB-C or Lightning) when you order.", zh:"带麦克风和线控的有线耳机，音质很好。插上就能听，不用充电，也不用配对。下单时选 Type-C 或 Lightning 接口。"},
+      points:[
+        {h:{fr:"Micro et télécommande",en:"Mic and remote",zh:"麦克风加线控"}, p:{fr:"Micro intégré et télécommande sur le fil : appels, volume et lecture sans toucher le téléphone.",en:"Built-in mic and in-line remote: calls, volume and playback without touching your phone.",zh:"线上自带麦克风和线控，接电话、调音量、控制播放，不用碰手机。"}},
+        {h:{fr:"Très bon son",en:"Very good sound",zh:"音质很好"}, p:{fr:"Un son clair et agréable pour la musique, les appels et les vidéos.",en:"Clear, pleasant sound for music, calls and video.",zh:"听音乐、打电话、看视频，声音都清楚好听。"}},
+        {h:{fr:"Deux connecteurs au choix",en:"Two connectors to choose from",zh:"两种接口可选"}, p:{fr:"USB-C pour les téléphones et tablettes récents, Lightning pour les iPhone à port Lightning.",en:"USB-C for newer phones and tablets, Lightning for iPhones with a Lightning port.",zh:"Type-C 接新款手机、平板，Lightning 接带 Lightning 口的 iPhone。"}},
+        {h:{fr:"Boîte avec étui",en:"Boxed with tray",zh:"盒装带托盘"}, p:{fr:"Câble enroulé dans un étui de rangement, prêt à ranger ou à offrir.",en:"Cable coiled in a storage tray, ready to store or gift.",zh:"线材绕好收在托盘里，方便收纳，也方便送人。"}}
+      ],
+      specs:[
+        [{fr:"Type",en:"Type",zh:"类型"}, {fr:"Écouteurs filaires intra-auriculaires",en:"Wired earbuds",zh:"入耳式有线耳机"}],
+        [{fr:"Connecteur",en:"Connector",zh:"接口"}, {fr:"USB-C ou Lightning, selon le choix",en:"USB-C or Lightning, as selected",zh:"Type-C 或 Lightning，下单时选择"}],
+        [{fr:"Fonctions",en:"Features",zh:"功能"}, {fr:"Micro intégré, télécommande sur le fil",en:"Built-in mic, in-line remote",zh:"内置麦克风，线控"}],
+        [{fr:"Emballage",en:"Packaging",zh:"包装"}, {fr:"Boîte avec étui de rangement",en:"Box with storage tray",zh:"盒装，带收纳托盘"}],
+        [{fr:"Couleur",en:"Colour",zh:"颜色"}, {fr:"Blanc",en:"White",zh:"白色"}],
+        [{fr:"Compatible avec",en:"Works with",zh:"适用设备"}, {fr:"Téléphones et tablettes à port USB-C ou Lightning",en:"Phones and tablets with a USB-C or Lightning port",zh:"带 Type-C 或 Lightning 接口的手机、平板"}]
+      ],
+      fine:{fr:"Vérifiez que votre appareil prend en charge l'audio par ce connecteur.",en:"Check that your device supports audio over this connector.",zh:"使用前请确认你的设备支持该接口的音频输出。"}
+    } },
   { id:"ear-c", cat:"ear", img:"earbuds-case.jpg", price:"",
     name:{fr:"Écouteurs sans fil Bluetooth", en:"Bluetooth wireless earbuds", zh:"蓝牙无线耳机"},
     desc:{fr:"Intra-auriculaires avec réduction du bruit, mode transparence, commandes tactiles et boîtier de recharge USB-C.", en:"In-ear buds with noise reduction, transparency mode, touch controls and a USB-C charging case.", zh:"入耳式，带降噪、通透模式、触控操作和 Type-C 充电盒。"},
@@ -450,9 +467,10 @@ var ICON={ cable:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="18"
 
 var PRICES=null;   /* filled in after a correct member code */
 function fmt(n){ var s=Number(n).toFixed(2); return lang==="fr" ? s.replace(".",",")+" $" : "$"+s; }
+function priceOf(id,sel){ var p=PRODUCTS.filter(function(x){return x.id===id})[0], k=(p&&p.priceIds)?p.priceIds[sel[0]]:id; return PRICES?PRICES[k]:null; }
 function priceNode(p){
   var t=T[lang];
-  if(PRICES){ return document.createTextNode(PRICES[p.id]!=null ? fmt(PRICES[p.id]) : t.ask); }
+  if(PRICES){ var pv=priceOf(p.id,picks[p.id]); return document.createTextNode(pv!=null ? fmt(pv) : t.ask); }
   var b=el("button","lock"); b.type="button"; b.onclick=openMember;
   var blur=el("span","blur",lang==="fr"?"88,88 $":"$88.88"); blur.setAttribute("aria-hidden","true");
   b.appendChild(blur); b.appendChild(el("span","lk","\uD83D\uDD12 "+t.lockTxt)); return b;
@@ -552,7 +570,7 @@ function render(){
 
 var shown=null;
 function openDetail(p){
-  shown=p; var t=T[lang], d=p.detail, body=$("dBody"); body.textContent="";
+  shown=p; var t=T[lang], d=p.detail, gl=d.galleries?d.galleries[picks[p.id][0]]:d.gallery, body=$("dBody"); body.textContent="";
   var top=el("div","d-top"), h=el("h2",null,p.name[lang]); h.id="dTitle";
   var x=el("button","d-close","×"); x.type="button"; x.setAttribute("aria-label",t.close); x.onclick=function(){$("dlg").close()};
   top.appendChild(h); top.appendChild(x); body.appendChild(top);
@@ -560,8 +578,8 @@ function openDetail(p){
   var dp=el("div","d-price"); dp.appendChild(priceNode(p)); body.appendChild(dp);
   if(d.video){ var vb=el("div","d-video"), v=el("video"); if(d.portrait){ vb.style.aspectRatio="9/16"; vb.style.maxWidth="340px"; vb.style.margin="0 auto"; } v.src=d.video; if(d.poster)v.poster=d.poster;
     v.controls=true; v.playsInline=true; v.setAttribute("playsinline",""); v.preload="metadata"; vb.appendChild(v); body.appendChild(vb); }
-  if(d.gallery){ var g=el("div","gal");
-    d.gallery.forEach(function(src,i){ var im=el("img"); im.src=src; im.alt=p.name[lang]+" "+(i+1); var zb=el("button"); zb.type="button"; zb.onclick=function(){openZoom(d.gallery,i)}; zb.appendChild(im); g.appendChild(zb); }); body.appendChild(g); }
+  if(gl){ var g=el("div","gal");
+    gl.forEach(function(src,i){ var im=el("img"); im.src=src; im.alt=p.name[lang]+" "+(i+1); var zb=el("button"); zb.type="button"; zb.onclick=function(){openZoom(gl,i)}; zb.appendChild(im); g.appendChild(zb); }); body.appendChild(g); }
   else if(p.img){ var ph=el("div","d-photo"), im2=el("img"); im2.src=p.img; im2.alt=p.name[lang]; ph.appendChild(im2); body.appendChild(ph); }
   if(d.combos){
   var s1=el("section"); s1.appendChild(el("h3","d-h",t.ways)); var cg=el("div","combos");
@@ -597,11 +615,11 @@ function lineText(c){
   var p=PRODUCTS.filter(function(x){return x.id===c.id})[0];
   return { name:p.name[lang], opts:p.options.map(function(o,i){return o.values[c.sel[i]][lang]}).join(" · ") };
 }
-function orderTotal(){ var s=0; cart.forEach(function(c){ if(PRICES&&PRICES[c.id]!=null) s+=PRICES[c.id]*c.qty }); return s; }
+function orderTotal(){ var s=0; cart.forEach(function(c){ var pv=priceOf(c.id,c.sel); if(PRICES&&pv!=null) s+=pv*c.qty }); return s; }
 function orderText(){
   var t=T[lang], d=new Date().toISOString().slice(0,10);
   if(!PRICES) return t.hello+"\n"+cart.map(function(c){var L=lineText(c); return "• "+c.qty+" × "+L.name+(L.opts?" ("+L.opts+")":"")}).join("\n");
-  return t.orderHead+" · "+MEMBER+" · "+d+"\n"+cart.map(function(c){ var L=lineText(c), pr=PRICES[c.id];
+  return t.orderHead+" · "+MEMBER+" · "+d+"\n"+cart.map(function(c){ var L=lineText(c), pr=priceOf(c.id,c.sel);
     return "• "+c.qty+" × "+L.name+(L.opts?" ("+L.opts+")":"")+(pr!=null ? " @ "+fmt(pr)+" = "+fmt(pr*c.qty) : " ("+t.noPrice+")") }).join("\n")+"\n"+t.total+" : "+fmt(orderTotal());
 }
 function renderTray(){
@@ -617,7 +635,7 @@ function renderTray(){
   var tot=$("tot"); tot.hidden=!(open&&n&&PRICES); tot.textContent="";
   if(PRICES){ tot.appendChild(el("span",null,t.total)); tot.appendChild(el("span",null,fmt(orderTotal()))); }
   cart.forEach(function(c,idx){
-    var L=lineText(c), li=el("li"), left=el("div"), pr=PRICES?PRICES[c.id]:null;
+    var L=lineText(c), li=el("li"), left=el("div"), pr=PRICES?priceOf(c.id,c.sel):null;
     left.appendChild(document.createTextNode(L.name));
     left.appendChild(el("small",null,L.opts+(PRICES ? (L.opts?" · ":"")+(pr!=null ? fmt(pr)+" "+t.each+" = "+fmt(pr*c.qty) : t.noPrice) : "")));
     var q=el("div","qty"), minus=el("button",null,"−"), plus=el("button",null,"+"), inp=el("input");
