@@ -245,9 +245,29 @@ var SHOP = {
    Prices are NOT written here. They are stored locked (encrypted) in LOCKED below
    and only appear after a store logs in with its username and password. */
 var PRODUCTS = [
+  { id:"ear-basic", cat:"ear", img:"ear-basic-typec-box2.jpg", price:"",
+    imgs:["ear-basic-typec-box2.jpg","ear-basic-lightning-box2.jpg"],
+    name:{fr:"Écouteurs filaires (Basic)", en:"Wired headphones (Basic)", zh:"有线耳机（基础款）"},
+    desc:{fr:"Écouteurs filaires de base, avec commande sur le fil. Au choix : Type-C ou Lightning.", en:"Basic wired earphones with an in-line control. Choose Type-C or Lightning.", zh:"基础款有线耳机，线上带控制键。可选 Type-C 或 Lightning 接口。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ],
+    detail:{
+      galleries:[ ["ear-basic-typec-box2.jpg","ear-basic-typec-pack.jpg"], ["ear-basic-lightning-box2.jpg","ear-basic-lightning-tray.jpg"] ],
+      lead:{fr:"Des écouteurs filaires simples, en boîte, avec connecteur Type-C ou Lightning. Choisissez le connecteur au moment de commander.", en:"Simple boxed wired earphones with a Type-C or Lightning connector. Pick the connector when you order.", zh:"简单实用的盒装有线耳机，Type-C 或 Lightning 接口。下单时选接口。"},
+      points:[
+        {h:{fr:"Deux connecteurs",en:"Two connectors",zh:"两种接口"}, p:{fr:"Type-C ou Lightning, selon le téléphone.",en:"Type-C or Lightning, to match the phone.",zh:"Type-C 或 Lightning，按手机选。"}},
+        {h:{fr:"Commande sur le fil",en:"In-line control",zh:"线控"}, p:{fr:"Boutons de volume sur le fil.",en:"Volume buttons on the cable.",zh:"线上有音量键。"}},
+        {h:{fr:"Prêt pour le comptoir",en:"Counter-ready",zh:"盒装，可直接摆"}, p:{fr:"Vendu en boîte, prêt à exposer.",en:"Sold in a box, ready to display.",zh:"盒装，拿来就能摆。"}}
+      ],
+      specs:[
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"Type-C ou Lightning",en:"Type-C or Lightning",zh:"Type-C 或 Lightning"}],
+        [{fr:"Type",en:"Type",zh:"类型"}, {fr:"Filaire, intra-auriculaire",en:"Wired, in-ear",zh:"有线入耳式"}],
+        [{fr:"Emballage",en:"Packaging",zh:"包装"}, {fr:"Boîte",en:"Box",zh:"盒装"}]
+      ],
+      fine:{fr:"La compatibilité peut varier selon l'appareil.",en:"Compatibility may vary by device.",zh:"兼容情况可能因设备而异。"}
+    } },
   { id:"ear-b", cat:"ear", img:"earbuds-typec-a.jpg", price:"",
     imgs:["earbuds-typec-a.jpg","earbuds-lightning-1.jpg"],
-    name:{fr:"Écouteurs filaires", en:"Wired earphones", zh:"有线耳机"},
+    name:{fr:"Écouteurs filaires (Amélioré)", en:"Wired headphones (Upgrade)", zh:"有线耳机（升级款）"},
     desc:{fr:"Micro et télécommande sur le fil, très bon son. Au choix : USB-C ou Lightning. Livrés en boîte avec étui.", en:"In-line mic and remote, very good sound. Choose USB-C or Lightning. Boxed, with a storage tray.", zh:"带麦克风和线控，音质很好。可选 Type-C 或 Lightning 接口，盒装带收纳托盘。"},
     options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"USB-C",en:"USB-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ],
     detail:{
@@ -357,10 +377,32 @@ var PRODUCTS = [
     name:{fr:"Câble arc-en-ciel tressé", en:"Rainbow braided cable", zh:"彩虹编织线"},
     desc:{fr:"Câble tressé multicolore, 1 m. Au choix : Type-C ou Lightning.", en:"Multicolour braided cable, 1 m (3 ft). Choose Type-C or Lightning.", zh:"彩色编织线，1 米。可选 Type-C 或 Lightning。"},
     options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
-  { id:"cable-zinc", cat:"cable", img:"", price:"",
+  { id:"cable-zinc", cat:"cable", img:"cable-zinc-black-sq2.jpg", price:"",
+    imgs:["cable-zinc-black-sq2.jpg","cable-zinc-white-sq2.jpg"],
     name:{fr:"Câble tressé en alliage de zinc", en:"Zinc-alloy braided cable", zh:"彩色锌合金编织线"},
-    desc:{fr:"Câble tressé avec embouts en alliage de zinc, 1 m. Au choix : Type-C ou Lightning.", en:"Braided cable with zinc-alloy ends, 1 m (3 ft). Choose Type-C or Lightning.", zh:"锌合金接头编织线，1 米。可选 Type-C 或 Lightning。"},
-    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ] },
+    desc:{fr:"Câble tressé avec embouts en alliage de zinc, 1 m. Noir ou blanc. Au choix : USB-C vers USB-C ou USB-C vers Lightning.", en:"Braided cable with zinc-alloy ends, 1 m (3 ft). Black or white. Choose USB-C to USB-C or USB-C to Lightning.", zh:"锌合金接头编织线，1 米。黑色或白色。可选 USB-C 对 USB-C，或 USB-C 对 Lightning。"},
+    options:[
+      {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Noir",en:"Black",zh:"黑色"}, {fr:"Blanc",en:"White",zh:"白色"}]},
+      {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"USB-C vers USB-C",en:"USB-C to USB-C",zh:"USB-C 对 USB-C"}, {fr:"USB-C vers Lightning",en:"USB-C to Lightning",zh:"USB-C 对 Lightning"}]}
+    ],
+    detail:{
+      portrait:true,
+      galleries:[ ["cable-zinc-black-sq2.jpg","cable-zinc-white-sq2.jpg"], ["cable-zinc-white-sq2.jpg","cable-zinc-black-sq2.jpg"] ],
+      lead:{fr:"Un câble tressé avec embouts en alliage de zinc, long de 1 m. Choisissez la couleur et le type de connecteur au moment de commander.", en:"A braided cable with zinc-alloy ends, 1 m (3 ft) long. Pick the colour and the connector type when you order.", zh:"锌合金接头编织线，长 1 米。下单时选颜色和接口类型。"},
+      points:[
+        {h:{fr:"Embouts en alliage de zinc",en:"Zinc-alloy ends",zh:"锌合金接头"}, p:{fr:"Embouts métalliques solides, gaine tressée.",en:"Sturdy metal ends and a braided jacket.",zh:"金属接头结实，线身编织。"}},
+        {h:{fr:"Noir ou blanc",en:"Black or white",zh:"黑色、白色两色"}, p:{fr:"Chaque commande indique la couleur choisie.",en:"Each order line shows the colour you picked.",zh:"订单里会标明你选的颜色。"}},
+        {h:{fr:"Deux types de connecteur",en:"Two connector types",zh:"两种接口"}, p:{fr:"USB-C vers USB-C, ou USB-C vers Lightning.",en:"USB-C to USB-C, or USB-C to Lightning.",zh:"USB-C 对 USB-C，或 USB-C 对 Lightning。"}}
+      ],
+      specs:[
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1 m (3 pi)",en:"1 m (3 ft)",zh:"1 米（3 英尺）"}],
+        [{fr:"Embouts",en:"Ends",zh:"接头"}, {fr:"Alliage de zinc",en:"Zinc alloy",zh:"锌合金"}],
+        [{fr:"Gaine",en:"Jacket",zh:"线身"}, {fr:"Tressée",en:"Braided",zh:"编织"}],
+        [{fr:"Couleurs",en:"Colours",zh:"颜色"}, {fr:"Noir, blanc",en:"Black, white",zh:"黑色、白色"}],
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-C vers USB-C ou USB-C vers Lightning",en:"USB-C to USB-C or USB-C to Lightning",zh:"USB-C 对 USB-C 或 USB-C 对 Lightning"}]
+      ],
+      fine:{fr:"Il s'agit d'un câble, pas d'un chargeur. La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés. Les couleurs peuvent varier légèrement selon l'écran.",en:"This is a cable, not a charger. Actual charging speed depends on your device and charger. Colours may look slightly different on your screen.",zh:"这是数据线，不是充电器。实际充电速度取决于设备和充电器。颜色可能因屏幕略有差异。"}
+    } },
   { id:"cable-5in1", cat:"cable", img:"cable-5in1.jpg", price:"",
     name:{fr:"Câble multifonction 5 en 1", en:"5-in-1 cable", zh:"五合一多功能数据线"},
     desc:{fr:"Câble de recharge rapide (ce n'est pas un chargeur). Type-C, Lightning et Micro-USB, 1,2 m.", en:"Fast-charging cable (not a charger). Type-C, Lightning and Micro-USB, 1.2 m (4 ft).", zh:"这是快充线，不是快充头。Type-C、Lightning、Micro-USB 三个接头，1.2 米。"},
@@ -384,14 +426,48 @@ var PRODUCTS = [
       ],
       fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"Actual charging speed depends on your device and charger.",zh:"实际充电速度取决于你的设备和充电头。"}
     } },
-  { id:"cable-stand", cat:"cable", img:"", price:"",
+  { id:"cable-stand", cat:"cable", img:"cable-stand-usba.jpg", price:"",
+    imgs:["cable-stand-usba.jpg","cable-stand-typec.jpg"],
     name:{fr:"Câble avec support", en:"Stand cable", zh:"桌面立式支架线"},
-    desc:{fr:"Câble USB / Type-C avec support de bureau, 1,5 m.", en:"USB / Type-C cable with a desk stand, 1.5 m (5 ft).", zh:"USB / Type-C 桌面立式支架线，1.5 米。"},
-    options:[] },
-  { id:"cable-3m", cat:"cable", img:"", price:"",
+    desc:{fr:"Câble tressé avec support de bureau pliable, 1,5 m. Au choix : USB-A vers Type-C ou Type-C vers Type-C.", en:"Braided cable with a fold-out desk stand, 1.5 m (5 ft). Choose USB-A to Type-C or Type-C to Type-C.", zh:"带可折叠桌面支架的编织线，1.5 米。可选 USB-A 对 Type-C，或 Type-C 对 Type-C。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"USB-A vers Type-C",en:"USB-A to Type-C",zh:"USB-A 对 Type-C"}, {fr:"Type-C vers Type-C",en:"Type-C to Type-C",zh:"Type-C 对 Type-C"}]} ],
+    detail:{
+      galleries:[ ["cable-stand-usba.jpg","cable-stand-typec.jpg"], ["cable-stand-typec.jpg","cable-stand-usba.jpg"] ],
+      lead:{fr:"Un câble tressé dont l'embout coudé se déplie en petit support : posez votre téléphone sur le bureau pour regarder une vidéo ou passer un appel. Choisissez le type de connecteur au moment de commander.", en:"A braided cable whose angled head folds out into a small stand, so your phone can sit on the desk for video or calls. Pick the connector type when you order.", zh:"编织线，弯头接口可以展开成小支架，手机立在桌上看视频、打电话。下单时选接口类型。"},
+      points:[
+        {h:{fr:"Support intégré",en:"Built-in stand",zh:"自带支架"}, p:{fr:"L'embout se déplie pour tenir le téléphone pendant la recharge.",en:"The head folds out to hold your phone while it charges.",zh:"接头展开就是支架，充电时手机能立着。"}},
+        {h:{fr:"Deux types de connecteur",en:"Two connector types",zh:"两种接口"}, p:{fr:"USB-A vers Type-C, ou Type-C vers Type-C.",en:"USB-A to Type-C, or Type-C to Type-C.",zh:"USB-A 对 Type-C，或 Type-C 对 Type-C。"}},
+        {h:{fr:"Gaine tressée",en:"Braided jacket",zh:"编织线身"}, p:{fr:"Câble plat tressé de 1,5 m.",en:"A 1.5 m (5 ft) braided cable.",zh:"1.5 米编织线。"}}
+      ],
+      specs:[
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"1,5 m (5 pi)",en:"1.5 m (5 ft)",zh:"1.5 米（5 英尺）"}],
+        [{fr:"Gaine",en:"Jacket",zh:"线身"}, {fr:"Tressée",en:"Braided",zh:"编织"}],
+        [{fr:"Support",en:"Stand",zh:"支架"}, {fr:"Pliable, intégré à l'embout",en:"Fold-out, built into the head",zh:"可折叠，在接头上"}],
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-A vers Type-C ou Type-C vers Type-C",en:"USB-A to Type-C or Type-C to Type-C",zh:"USB-A 对 Type-C 或 Type-C 对 Type-C"}]
+      ],
+      fine:{fr:"Il s'agit d'un câble, pas d'un chargeur. La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés.",en:"This is a cable, not a charger. Actual charging speed depends on your device and charger.",zh:"这是数据线，不是充电器。实际充电速度取决于设备和充电器。"}
+    } },
+  { id:"cable-3m", cat:"cable", img:"cable-3m-blue.jpg", price:"",
+    imgs:["cable-3m-blue.jpg","cable-3m-silver.jpg"],
     name:{fr:"Câble de rallonge 3 m", en:"3 m extension cable", zh:"3 米加长线"},
-    desc:{fr:"Câble long de 3 m pour recharger depuis le lit, le canapé ou le comptoir.", en:"Long 3 m (10 ft) cable to charge from bed, sofa or counter.", zh:"3 米长线，躺床上、坐沙发、站柜台都能充。"},
-    options:[] },
+    desc:{fr:"Câble tressé long de 3 m, USB-A vers Type-C, pour recharger depuis le lit, le canapé ou le comptoir. Bleu ou argent.", en:"Long 3 m (10 ft) braided cable, USB-A to Type-C, to charge from bed, sofa or counter. Blue or silver.", zh:"3 米编织长线，USB-A 对 Type-C，躺床上、坐沙发、站柜台都能充。蓝色或银白色。"},
+    options:[ {label:{fr:"Couleur",en:"Colour",zh:"颜色"}, values:[{fr:"Bleu",en:"Blue",zh:"蓝色"}, {fr:"Argent",en:"Silver",zh:"银白色"}]} ],
+    detail:{
+      galleries:[ ["cable-3m-blue.jpg","cable-3m-silver.jpg"], ["cable-3m-silver.jpg","cable-3m-blue.jpg"] ],
+      lead:{fr:"Un câble tressé de 3 m, USB-A vers Type-C. Assez long pour recharger depuis le lit, le canapé ou le comptoir. Choisissez la couleur au moment de commander.", en:"A 3 m (10 ft) braided cable, USB-A to Type-C. Long enough to charge from bed, sofa or counter. Pick the colour when you order.", zh:"3 米编织线，USB-A 对 Type-C。长度够用，躺床上、坐沙发、站柜台都能充。下单时选颜色。"},
+      points:[
+        {h:{fr:"3 mètres de long",en:"3 m long",zh:"3 米长"}, p:{fr:"Pour recharger sans rester collé à la prise.",en:"Charge without staying next to the outlet.",zh:"充电时不用守在插座旁边。"}},
+        {h:{fr:"Gaine tressée",en:"Braided jacket",zh:"编织线身"}, p:{fr:"Gaine tressée solide, embouts renforcés.",en:"Sturdy braided jacket with reinforced ends.",zh:"编织线身结实，接头处有加固。"}},
+        {h:{fr:"Bleu ou argent",en:"Blue or silver",zh:"蓝色、银白色"}, p:{fr:"Chaque commande indique la couleur choisie.",en:"Each order line shows the colour you picked.",zh:"订单里会标明你选的颜色。"}}
+      ],
+      specs:[
+        [{fr:"Longueur",en:"Length",zh:"长度"}, {fr:"3 m (10 pi)",en:"3 m (10 ft)",zh:"3 米（10 英尺）"}],
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"USB-A vers Type-C",en:"USB-A to Type-C",zh:"USB-A 对 Type-C"}],
+        [{fr:"Gaine",en:"Jacket",zh:"线身"}, {fr:"Tressée",en:"Braided",zh:"编织"}],
+        [{fr:"Couleurs",en:"Colours",zh:"颜色"}, {fr:"Bleu, argent",en:"Blue, silver",zh:"蓝色、银白色"}]
+      ],
+      fine:{fr:"Il s'agit d'un câble, pas d'un chargeur. La vitesse de recharge réelle dépend de l'appareil et du chargeur utilisés. Les couleurs peuvent varier légèrement selon l'écran.",en:"This is a cable, not a charger. Actual charging speed depends on your device and charger. Colours may look slightly different on your screen.",zh:"这是数据线，不是充电器。实际充电速度取决于设备和充电器。颜色可能因屏幕略有差异。"}
+    } },
   { id:"charger-45w", cat:"charger", img:"charger-45w-front.jpg",
     name:{fr:"Bloc de charge rapide 45 W", en:"45W fast charging block", zh:"45W 快充头"},
     desc:{fr:"Recharge rapide pour téléphone et ordinateur portable. Un port USB-C et un port USB-A.", en:"Fast charging for phone and laptop. One USB-C and one USB-A port.", zh:"手机和笔记本电脑都能快充。一个 USB-C 口加一个 USB-A 口。"},
@@ -415,15 +491,30 @@ var PRODUCTS = [
       ],
       fine:{fr:"La vitesse de recharge réelle dépend de l'appareil et du câble utilisés.",en:"Actual charging speed depends on your device and cable.",zh:"实际充电速度取决于你的设备和充电线。"}
     } },
-  { id:"adapter", cat:"ear", img:"", price:"",
+  { id:"adapter", cat:"ear", img:"adapter-pair.jpg", price:"",
     name:{fr:"Adaptateur audio pour écouteurs", en:"Headphone audio adapter", zh:"耳机转接插头"},
-    desc:{fr:"Adaptateur pour brancher des écouteurs filaires.", en:"Adapter to connect wired earphones.", zh:"用于连接有线耳机的转接头。"},
-    options:[] },
+    desc:{fr:"Adaptateur pour brancher des écouteurs filaires (prise 3,5 mm). Au choix : Type-C (bleu) ou Lightning (blanc).", en:"Adapter to connect wired earphones (3.5 mm jack). Choose Type-C (blue) or Lightning (white).", zh:"用于连接有线耳机的转接头（3.5 毫米耳机孔）。可选 Type-C（蓝色）或 Lightning（白色）。"},
+    options:[ {label:{fr:"Connecteur",en:"Connector",zh:"接口"}, values:[{fr:"Type-C",en:"Type-C",zh:"Type-C"}, {fr:"Lightning",en:"Lightning",zh:"Lightning"}]} ],
+    detail:{
+      gallery:["adapter-pair.jpg","adapter-bag.jpg"],
+      lead:{fr:"Un petit adaptateur pour brancher des écouteurs filaires à prise 3,5 mm sur un téléphone Type-C ou Lightning. Choisissez le connecteur au moment de commander.", en:"A small adapter that lets wired earphones with a 3.5 mm plug connect to a Type-C or Lightning phone. Pick the connector when you order.", zh:"小转接头，让 3.5 毫米插头的有线耳机能接到 Type-C 或 Lightning 手机上。下单时选接口。"},
+      points:[
+        {h:{fr:"Deux versions",en:"Two versions",zh:"两种接口"}, p:{fr:"Type-C (bleu) et Lightning (blanc).",en:"Type-C (blue) and Lightning (white).",zh:"Type-C（蓝色）和 Lightning（白色）。"}},
+        {h:{fr:"Prise 3,5 mm",en:"3.5 mm jack",zh:"3.5 毫米耳机孔"}, p:{fr:"Pour brancher des écouteurs filaires.",en:"For wired earphones.",zh:"用来接有线耳机。"}},
+        {h:{fr:"Vendu en sachet",en:"Bagged",zh:"袋装"}, p:{fr:"Présenté en sachet transparent refermable.",en:"Packed in a clear resealable bag.",zh:"透明自封袋包装。"}}
+      ],
+      specs:[
+        [{fr:"Connecteurs",en:"Connectors",zh:"接口"}, {fr:"Type-C ou Lightning",en:"Type-C or Lightning",zh:"Type-C 或 Lightning"}],
+        [{fr:"Sortie",en:"Output",zh:"输出"}, {fr:"Prise 3,5 mm",en:"3.5 mm jack",zh:"3.5 毫米耳机孔"}],
+        [{fr:"Couleurs",en:"Colours",zh:"颜色"}, {fr:"Type-C bleu, Lightning blanc",en:"Type-C blue, Lightning white",zh:"Type-C 蓝色，Lightning 白色"}]
+      ],
+      fine:{fr:"La compatibilité peut varier selon l'appareil. Les couleurs peuvent varier légèrement selon l'écran.",en:"Compatibility may vary by device. Colours may look slightly different on your screen.",zh:"兼容情况可能因设备而异。颜色可能因屏幕略有差异。"}
+    } },
 ];
 var ORDER={cable:0,charger:1,ear:2}; PRODUCTS.sort(function(a,b){return ORDER[a.cat]-ORDER[b.cat]});
 
 /* Member logins and prices, locked. Do not edit by hand. */
-var LOCKED = {"p":{"i":"G5Kx5Gssvk39r+pr","c":"MWay241VM299I2LX2nbSOIZFUUEGZQSe+jdgahArGQ4q8APia4IoW+W8ohEDJ+npzJuLE5CDr2nMQQ3+biltxGbN5bJNymFgJGyGeTrars+n6NKT3dQQe2RYHEpG3/e8ZzaPQDVu/VT8rfYOhmQR9lggwB9k6CLF6jb4N74qCXmgnHHK2JOJ2BKNl+S/+1y9xnN6MFC0xNvibMxoYwEDmiYCUvZGR8ancNk5FUMhh8TsKi/5OuPj2apyWgTOTwClC0c60Ec9jvXOCrzjvjeS9ny1wWOE4YtUhYaEEu2Ra0tq7PPoHcN88A=="},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"f00dce2cc66e753e","i":"qMVdFfOf00SUDzqQ","c":"3EkMa6n7LvBZLF2ywEL8/N36+93HUEfgjsl/m9JwQ3Nr6Mg5PfHpBk9JV+8jdA8PPZzBDKv/hdBiKplPQILeLNHS9xiqwJ4jRU6CSjo5xAciNjJibTZX5ZyLUasNhcI="},{"t":"699ff3ccf5b18011","i":"zVbl7jN4PmTBzkgB","c":"PrBSNmG0LFPwtoi/OCqyYU6TqkfRV7ktgN8sJPxEFNflGhux8Ce982gPOoreZzbR2bDOJ4YYPwDU2C4j6XyloNIPhmbXg7LP+7vzLwHYfXXk6y3Dapj6pTTU9zvnTOCZ49EX1dKxUGs="},{"t":"75c8fb45d4f09454","i":"9WeveuS67w4Z1tEv","c":"bLoQnvEvIHQ4vB1OxCd22lmDZcs8jegYhgYUMpbDzN981WasUZkFPiGZw+uXccDVd5aYQbcvpsRtEIc6B09+SoKhplbzaHwk1QWKuut2b/kuduRKVLWgHxSI5r8Er9DE"},{"t":"21e9ed0feb25d863","i":"n4Mitxn16aAa60Pk","c":"gt9fLonLQONomcqFL5PpvA1WWcLhVSr3hzAd50CEzrWwuqtoPSf91ydok4HQBn/39Of7iCBn2prDJWjk423f3Wt+zOjzqU/qtr+fUkcGKORjuSORyRsnPzDzmmTIJpM70u41/XsVOg=="},{"t":"78c323a0552d2dc3","i":"SF1Ee+lPzysgGRWQ","c":"eJ/f24dlUlNPCKrH4HSPztyh2fC2eP7NE3eU8+OCM8YdTUoBjo7gyNwqRT5YDuvEawQU48+YgC4z4g3j8I3QhYxlakoNP/lyAG7kpO5kEHhm7xLnwzHe5OnvTuJDGa7p1LM="},{"t":"e0fd6ae82113e88b","i":"QkFVuFjziIBXuOQp","c":"D39kLVe4n2hk9zNlq9fvZar5pnkHDYaC17pYuEHgc6Xq2B7t5wGWyQ+yziQbC9wQ73xCpvGzdJaQkKGvF/1UZRgqRwY/pxqLaKqj4f1oEwvGHxj+06hKlv84mKXasTn+hb19YnK7Y8tw"},{"t":"70cf037b3d00b990","i":"uhdemP8JW2tw8ccP","c":"c/cWSuBNcWN/QFFXnarRnBy73VHdclPd+fAfyeCjC9EujNbKNXf3CB4Vgb+LXUbFzdtm826vm9ThuK0p7D7O10xjKZGLlfHgrtQsgB/16+R5YXisMbsVJn6qFTjCG+9b9Q=="},{"t":"8c72aed0082724af","i":"RmKoJuEK0XuE9mFs","c":"0/ZbxbICMF/oeSevyOWAWgHlcAfHouiVnkNZse53D3uobKsayZ/tjX/0hAxi3Y3HVbQOYuOU6JUb/O0y6rV9XHoWLm9ce8vKbg5ioz3GBRtKY5JU7BD5K95oSU4+"},{"t":"1b94a3b077a611b4","i":"mcxwpHG4qcenoQxs","c":"kiNmFC5sEztpGFW5W8aS1zoUcxqVAEYyGtKvyfydi8mOcyHDVLFlwwexHT4/vRS/W81T5SsH7Cgr7fudE+mQPTsd4HGNl+fRiYK5LrDTDDYlKCmAKl3RhIA5pOyvKE3BaA=="},{"t":"b1e1757fc27c4021","i":"sho98Cft2V2Mnb0n","c":"pHrOovVAMXwfbE0BoAp+wIYmtZ6wsSR+Q1+hiouooqYNSp9MwG1edcTMX3GfGihi1MJrQ6HQ+YJy4UCv/8RGT/i+8spTGzw1bM1FaOdsVYZUIKep2qLBgP/Gy9amxmaglQ=="},{"t":"934e18b54b7db3c8","i":"k6mNCPa4aemO/Z4T","c":"O0tCWjPPduKQ59OjfAb5nPYFBR58BNuNeFWUVN3IlmkZv7SxutCmn3omK8w+3Czqb2pgzUfXLoT6fLsNXyewfJe408eAOolszJKnnzYO5VME0SGT9e40MeRmJsVZvxY4f4IC2IH2yw=="},{"t":"3386dd2a844410c6","i":"wdc3oxbDDD3ktNv6","c":"YW2gp1/A0Qj4oBtsnWqkAhxoURDTUrQ6KJp0XF73Jqp7VHusqD6xZw4F2dJdGlHd1Byl4FjYVeJiGGz+/wKXBrAbo1+CfLTcQaIzfwzPzwQwViMHIQ2yXWNIY8Jn7R/e1E3iihPD"},{"t":"345cc5ebbff28224","i":"13pWnU8khVXWWYL0","c":"v7t+5RLo/199ID6L04pbGiobUDTVMeiA3+sp8zCeyPsV0NoAyhRImRVPkJ73T1PZuXIkTBqXiwdoYG1UhB85PD1QfDnE+jQ/MYEtA/HWCJGkl66TWhR2aJd+kFWV4iEezUgRBIDCA76/l0UMZkI="},{"t":"08dd3308d977530f","i":"rmfD9iWW0qp1I4hP","c":"evMHUs/tVn//EcS8CY2VUf4kQVVlJwW8Ino/Zv38KGv7BFidMmG3Amq9f8Qobn3gD53ie+SBKtK/rBoHlZXKLyIkoQIdgnTx6cO7dxNeR1kqlqFAZjx3Jqu8Ta0Nnra94w=="},{"t":"4452dfa46c1e8239","i":"NDGZ4KFfyEnUILFV","c":"gOKPtgx5KSi4w3Zf1ZzW37LgN5MRHOTpgNH3VFvft8tv/ytTrSdhRs8qWnsr8YuQ0U+a4JwCrM9ljZ5OlRnWw43NWEWCs0Aby4+UWpzsqbRBxcF0imotTTVBrCke+9fQdRi9/Io="},{"t":"c145f2ca00d38841","i":"PaXwXiEi9rNvtDMH","c":"qhq94pff4qRnGSHPS/wD+Q7J16pK5oOu0qp6uZmAw+VDAUkeppkqapMQgpN5Vvbev4vZ+fWQnNsT4l3/yUClMnzWiPMR17/3ouQXDPVFb6jBXs4wmcPEvRZ19bpcWIEk6DtddkcET2M="},{"t":"5825f5aa252b44ac","i":"zYUmQsZQPsb5Vv+z","c":"YNRqaFCVoaEtbd3KlrbLkNka63ZhN5hTY0qjMZzZ++gXUR9Wbj6PwTKiZ3xNJlY7vQ9GhMjdTdnvp+KglyY0hCdbeRi6Ir9rVVuXr2o/09UbDmuofJYBVltT/Jw98I3FvijD66AE3A=="},{"t":"43af8944eb258449","i":"C8XilDthNGPWYLJQ","c":"GTt8SNOo2oezXvj7vp9tezjVsnvQNzeRRRQubAOpcpneNJ/4lpZgBm9X1zJ7L6glm89e2R8NpW7zOwqiszABI+eWdmhaMxDNsG1CLrWbONZaNdgfwlVJVBr60QG1VPNltbfmgA=="},{"t":"469ee3cb4aaf3ed8","i":"CWnNj1gUAMKuw4ei","c":"N5Fqp9v9o7ac+JlCLXysdtR/Lc2+yqvxMYTwG2h6k4ZPIfaLEBCsYOYbhpwfMFcCZYXytu57jFlst1SpdaMhLqUsc5VO3ZK4AgoFP56b8oHIoRSMZsWmLZbFWRVJ/cz/toA="},{"t":"ea5dacdec4d04380","i":"sWME0+qRA44eaeOX","c":"NYwWa4+GVggfMmvazkmJ9thZ05fnBNHWKye+NdGO014K4tKBpcPWq/WgzB55fjezE4Cn2N9xM7bvUgiEJ5dLPPHjo5a+VhiEmUCWyFIyq+CUniR7KUD8zrr4oQa1gLA31e/kFj4="},{"t":"802e3d6b3e6bde28","i":"kZMqErMo8+y5D6ph","c":"0QbN3E6oMYWcGF6rs1yJ2zxT+7iWpJHhXAJpAhn3RkglAGnL3Kt8BHB5cqQxwBrA2hRrOQvT97c9/alNz9WH+Pb4l71rYpZoGWqEmvsddryfQVW+pBgt9CDCNHg4fUOlBoCJJiV7JmlyqKw="}]};
+var LOCKED = {"p":{"i":"XAN7M5DUvpuyoW5/","c":"7Sj2hiED+q4Vd/0ySxMf93lxo5jIhW6pegK87GvzClRLtSC5Kl8O8MVFYaJf+IjS+e+Z30A6WcJShULGLUFSPdH6w8MNh5XVkvzziK/+GN6D6KTqcNjJ8uamqDI1vJONdkOKGxjKsSal4XDXeCJfegobfc7uryW0S9yl6q2AtrEOR25NgauRn5f6boGD36dOWbuazx5mNpg6BqdiG5OL/XM8uu4/4YiY5B4FxVKzlqMBxQIAcZPAGYwNpkNi+TDxNxfjd5eitg/fKI4xCuwvhSDx5ec2ieAeFT1OUjmAgT/mQfvkZJbp0CiZliX1OF0TrtQE7scCS8DpaA=="},"s":"OnGmktFzWMBcZAbkQCXd5g==","m":[{"t":"f00dce2cc66e753e","i":"qMVdFfOf00SUDzqQ","c":"3EkMa6n7LvBZLF2ywEL8/N36+93HUEfgjsl/m9JwQ3Nr6Mg5PfHpBk9JV+8jdA8PPZzBDKv/hdBiKplPQILeLNHS9xiqwJ4jRU6CSjo5xAciNjJibTZX5ZyLUasNhcI="},{"t":"699ff3ccf5b18011","i":"zVbl7jN4PmTBzkgB","c":"PrBSNmG0LFPwtoi/OCqyYU6TqkfRV7ktgN8sJPxEFNflGhux8Ce982gPOoreZzbR2bDOJ4YYPwDU2C4j6XyloNIPhmbXg7LP+7vzLwHYfXXk6y3Dapj6pTTU9zvnTOCZ49EX1dKxUGs="},{"t":"75c8fb45d4f09454","i":"9WeveuS67w4Z1tEv","c":"bLoQnvEvIHQ4vB1OxCd22lmDZcs8jegYhgYUMpbDzN981WasUZkFPiGZw+uXccDVd5aYQbcvpsRtEIc6B09+SoKhplbzaHwk1QWKuut2b/kuduRKVLWgHxSI5r8Er9DE"},{"t":"21e9ed0feb25d863","i":"n4Mitxn16aAa60Pk","c":"gt9fLonLQONomcqFL5PpvA1WWcLhVSr3hzAd50CEzrWwuqtoPSf91ydok4HQBn/39Of7iCBn2prDJWjk423f3Wt+zOjzqU/qtr+fUkcGKORjuSORyRsnPzDzmmTIJpM70u41/XsVOg=="},{"t":"78c323a0552d2dc3","i":"SF1Ee+lPzysgGRWQ","c":"eJ/f24dlUlNPCKrH4HSPztyh2fC2eP7NE3eU8+OCM8YdTUoBjo7gyNwqRT5YDuvEawQU48+YgC4z4g3j8I3QhYxlakoNP/lyAG7kpO5kEHhm7xLnwzHe5OnvTuJDGa7p1LM="},{"t":"e0fd6ae82113e88b","i":"QkFVuFjziIBXuOQp","c":"D39kLVe4n2hk9zNlq9fvZar5pnkHDYaC17pYuEHgc6Xq2B7t5wGWyQ+yziQbC9wQ73xCpvGzdJaQkKGvF/1UZRgqRwY/pxqLaKqj4f1oEwvGHxj+06hKlv84mKXasTn+hb19YnK7Y8tw"},{"t":"70cf037b3d00b990","i":"uhdemP8JW2tw8ccP","c":"c/cWSuBNcWN/QFFXnarRnBy73VHdclPd+fAfyeCjC9EujNbKNXf3CB4Vgb+LXUbFzdtm826vm9ThuK0p7D7O10xjKZGLlfHgrtQsgB/16+R5YXisMbsVJn6qFTjCG+9b9Q=="},{"t":"8c72aed0082724af","i":"RmKoJuEK0XuE9mFs","c":"0/ZbxbICMF/oeSevyOWAWgHlcAfHouiVnkNZse53D3uobKsayZ/tjX/0hAxi3Y3HVbQOYuOU6JUb/O0y6rV9XHoWLm9ce8vKbg5ioz3GBRtKY5JU7BD5K95oSU4+"},{"t":"1b94a3b077a611b4","i":"mcxwpHG4qcenoQxs","c":"kiNmFC5sEztpGFW5W8aS1zoUcxqVAEYyGtKvyfydi8mOcyHDVLFlwwexHT4/vRS/W81T5SsH7Cgr7fudE+mQPTsd4HGNl+fRiYK5LrDTDDYlKCmAKl3RhIA5pOyvKE3BaA=="},{"t":"b1e1757fc27c4021","i":"sho98Cft2V2Mnb0n","c":"pHrOovVAMXwfbE0BoAp+wIYmtZ6wsSR+Q1+hiouooqYNSp9MwG1edcTMX3GfGihi1MJrQ6HQ+YJy4UCv/8RGT/i+8spTGzw1bM1FaOdsVYZUIKep2qLBgP/Gy9amxmaglQ=="},{"t":"934e18b54b7db3c8","i":"k6mNCPa4aemO/Z4T","c":"O0tCWjPPduKQ59OjfAb5nPYFBR58BNuNeFWUVN3IlmkZv7SxutCmn3omK8w+3Czqb2pgzUfXLoT6fLsNXyewfJe408eAOolszJKnnzYO5VME0SGT9e40MeRmJsVZvxY4f4IC2IH2yw=="},{"t":"3386dd2a844410c6","i":"wdc3oxbDDD3ktNv6","c":"YW2gp1/A0Qj4oBtsnWqkAhxoURDTUrQ6KJp0XF73Jqp7VHusqD6xZw4F2dJdGlHd1Byl4FjYVeJiGGz+/wKXBrAbo1+CfLTcQaIzfwzPzwQwViMHIQ2yXWNIY8Jn7R/e1E3iihPD"},{"t":"345cc5ebbff28224","i":"13pWnU8khVXWWYL0","c":"v7t+5RLo/199ID6L04pbGiobUDTVMeiA3+sp8zCeyPsV0NoAyhRImRVPkJ73T1PZuXIkTBqXiwdoYG1UhB85PD1QfDnE+jQ/MYEtA/HWCJGkl66TWhR2aJd+kFWV4iEezUgRBIDCA76/l0UMZkI="},{"t":"08dd3308d977530f","i":"rmfD9iWW0qp1I4hP","c":"evMHUs/tVn//EcS8CY2VUf4kQVVlJwW8Ino/Zv38KGv7BFidMmG3Amq9f8Qobn3gD53ie+SBKtK/rBoHlZXKLyIkoQIdgnTx6cO7dxNeR1kqlqFAZjx3Jqu8Ta0Nnra94w=="},{"t":"4452dfa46c1e8239","i":"NDGZ4KFfyEnUILFV","c":"gOKPtgx5KSi4w3Zf1ZzW37LgN5MRHOTpgNH3VFvft8tv/ytTrSdhRs8qWnsr8YuQ0U+a4JwCrM9ljZ5OlRnWw43NWEWCs0Aby4+UWpzsqbRBxcF0imotTTVBrCke+9fQdRi9/Io="},{"t":"c145f2ca00d38841","i":"PaXwXiEi9rNvtDMH","c":"qhq94pff4qRnGSHPS/wD+Q7J16pK5oOu0qp6uZmAw+VDAUkeppkqapMQgpN5Vvbev4vZ+fWQnNsT4l3/yUClMnzWiPMR17/3ouQXDPVFb6jBXs4wmcPEvRZ19bpcWIEk6DtddkcET2M="},{"t":"5825f5aa252b44ac","i":"zYUmQsZQPsb5Vv+z","c":"YNRqaFCVoaEtbd3KlrbLkNka63ZhN5hTY0qjMZzZ++gXUR9Wbj6PwTKiZ3xNJlY7vQ9GhMjdTdnvp+KglyY0hCdbeRi6Ir9rVVuXr2o/09UbDmuofJYBVltT/Jw98I3FvijD66AE3A=="},{"t":"43af8944eb258449","i":"C8XilDthNGPWYLJQ","c":"GTt8SNOo2oezXvj7vp9tezjVsnvQNzeRRRQubAOpcpneNJ/4lpZgBm9X1zJ7L6glm89e2R8NpW7zOwqiszABI+eWdmhaMxDNsG1CLrWbONZaNdgfwlVJVBr60QG1VPNltbfmgA=="},{"t":"469ee3cb4aaf3ed8","i":"CWnNj1gUAMKuw4ei","c":"N5Fqp9v9o7ac+JlCLXysdtR/Lc2+yqvxMYTwG2h6k4ZPIfaLEBCsYOYbhpwfMFcCZYXytu57jFlst1SpdaMhLqUsc5VO3ZK4AgoFP56b8oHIoRSMZsWmLZbFWRVJ/cz/toA="},{"t":"ea5dacdec4d04380","i":"sWME0+qRA44eaeOX","c":"NYwWa4+GVggfMmvazkmJ9thZ05fnBNHWKye+NdGO014K4tKBpcPWq/WgzB55fjezE4Cn2N9xM7bvUgiEJ5dLPPHjo5a+VhiEmUCWyFIyq+CUniR7KUD8zrr4oQa1gLA31e/kFj4="},{"t":"802e3d6b3e6bde28","i":"kZMqErMo8+y5D6ph","c":"0QbN3E6oMYWcGF6rs1yJ2zxT+7iWpJHhXAJpAhn3RkglAGnL3Kt8BHB5cqQxwBrA2hRrOQvT97c9/alNz9WH+Pb4l71rYpZoGWqEmvsddryfQVW+pBgt9CDCNHg4fUOlBoCJJiV7JmlyqKw="}]};
 
 /* Page wording in the three languages */
 var T = {
