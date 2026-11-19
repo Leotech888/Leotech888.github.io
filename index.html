@@ -125,6 +125,21 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .d-fine{font-size:12.5px;color:var(--muted);margin:0}
 
 /* how to order + footer */
+.showroom{margin:8px 0 40px;scroll-margin-top:80px}
+.showroom h2{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px;text-align:center}
+.showroom>p{color:var(--muted);margin:0 auto 22px;max-width:38em;text-align:center}
+.sr-view{overflow:hidden;border-radius:18px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.sr-track{display:flex;width:max-content;animation:srmove 48s linear infinite}
+.sr-view:hover .sr-track,.sr-view:active .sr-track{animation-play-state:paused}
+@keyframes srmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.sr-view{overflow-x:auto}.sr-track{animation:none}}
+.sr-card{flex:0 0 auto;width:190px;margin-right:14px;background:var(--tile);border-radius:18px;overflow:hidden;position:relative;cursor:pointer}
+@media(min-width:820px){.sr-card{width:230px}}
+.sr-card video{display:block;width:100%;aspect-ratio:9/16;background:#000;object-fit:cover}
+.sr-card h3{font-size:14px;font-weight:600;margin:0;padding:10px 12px 12px}
+.sr-card .snd{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:15px}
+.sr-hint{color:var(--muted);font-size:13px;text-align:center;margin:10px 0 0}
+.sr-ask{display:block;width:fit-content;margin:22px auto 0;padding:12px 22px;border-radius:980px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500}
 .how{margin:56px 0 0;background:var(--tile);border-radius:22px;padding:30px 24px;text-align:center}
 .how h2{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px}
 .how p{color:var(--muted);margin:0 auto;max-width:36em}
@@ -171,6 +186,14 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:28px 0 8px;
 </header>
 
 <main class="wrap">
+  <section class="showroom" id="showroom">
+    <h2 id="srTitle"></h2>
+    <p id="srText"></p>
+    <div class="sr-view"><div class="sr-track" id="srGrid"></div></div>
+    <p class="sr-hint" id="srHint"></p>
+    <a class="sr-ask" id="srAsk"></a>
+  </section>
+
   <section class="hero">
     <h1 id="heroTitle"></h1>
     <p id="heroText"></p>
@@ -518,7 +541,7 @@ var LOCKED = {"p":{"i":"XAN7M5DUvpuyoW5/","c":"7Sj2hiED+q4Vd/0ySxMf93lxo5jIhW6pe
 
 /* Page wording in the three languages */
 var T = {
-  fr:{ hero:"Choisissez votre modèle.", heroText:"Câbles, chargeurs et écouteurs pour commerces partenaires. Connectez-vous pour voir les prix et passer votre commande.",
+  fr:{ srHint:"Touchez une vidéo pour activer le son.", srTitle:"Notre gamme", srText:"Un aperçu de notre gamme. Un modèle absent du catalogue ? Demandez-nous.", srCap:["Câbles","Câbles tressés","Chargeurs muraux","Chargeurs de voiture"], srAsk:"Un article absent du catalogue ? Demandez-nous", srSubj:"Demande d'un article hors catalogue", hero:"Choisissez votre modèle.", heroText:"Câbles, chargeurs et écouteurs pour commerces partenaires. Connectez-vous pour voir les prix et passer votre commande.",
        soon:"Photo à venir", sample:"Exemple", all:"Tout", ear:"Écouteurs", cable:"Câbles", charger:"Chargeurs", add:"Ajouter", added:"Ajouté",
        ask:"Prix : demandez-nous", lockTxt:"Prix réservé aux membres", more:"Voir les détails", close:"Fermer", ways:"Quatre branchements", why:"Pourquoi ce câble", spec:"Fiche technique", login:"Espace membre", logout:"Déconnexion", mTitle:"Espace membre", mText:"Les prix et la commande en ligne sont réservés aux commerces partenaires. Entrez votre code membre.", mLabel:"Code membre", mGo:"Se connecter", mBad:"Ce code n'est pas valide. Vérifiez-le et réessayez.", mJoin:"Pas encore partenaire ? Appelez ou textez le "+SHOP.phone+".",
        order0:"Ma commande est vide", order:function(n){return "Ma commande : "+n+(n>1?" articles":" article")}, total:"Total", orderHead:"Commande", send:"Envoyer par texto", sendMail:"Envoyer la commande par courriel", sendAuto:"Envoyer la commande", sending:"Envoi en cours…", done:"Commande envoyée. Merci ! Nous vous confirmerons la livraison.", fail:"L'envoi n'a pas fonctionné. Réessayez, ou utilisez le bouton courriel.", each:"l'unité", noPrice:"prix à confirmer", sent:"Appuyez sur Envoyer dans l'application qui s'ouvre. Si rien ne s'ouvre, utilisez « Copier » et envoyez le texte au "+SHOP.phone+" ou à "+SHOP.email+".",
@@ -527,7 +550,7 @@ var T = {
        copyFail:"La copie n'a pas fonctionné. Appelez ou textez le "+SHOP.phone+" et dites-nous ce que vous avez choisi.",
        howTitle:"Comment commander", howText:"Connectez-vous avec votre code membre, ajoutez vos articles et appuyez sur « Envoyer la commande ». Nous confirmons la livraison.",
        foot:"Grossiste indépendant d'accessoires. Les noms de connecteurs servent uniquement à indiquer la compatibilité. Aucune affiliation avec les fabricants d'appareils.", hello:"Bonjour, voici ma sélection :" },
-  en:{ hero:"Pick your model.", heroText:"Cables, chargers and earphones for partner stores. Log in to see prices and place your order.",
+  en:{ srHint:"Tap a video for sound.", srTitle:"Our product range", srText:"A look at the range we carry. Need a style that is not in the catalogue? Just ask.", srCap:["Cables","Braided cables","Wall chargers","Car chargers"], srAsk:"Looking for something not in the catalogue? Ask us", srSubj:"Request for an item not in the catalogue", hero:"Pick your model.", heroText:"Cables, chargers and earphones for partner stores. Log in to see prices and place your order.",
        soon:"Photo coming soon", sample:"Example", all:"All", ear:"Earphones", cable:"Cables", charger:"Chargers", add:"Add", added:"Added",
        ask:"Price: ask us", lockTxt:"Members-only price", more:"See details", close:"Close", ways:"Four ways to plug in", why:"Why this cable", spec:"Specifications", login:"Member login", logout:"Log out", mTitle:"Member login", mText:"Prices and online ordering are reserved for partner stores. Enter your member code.", mLabel:"Member code", mGo:"Log in", mBad:"That code is not valid. Check it and try again.", mJoin:"Not a partner yet? Call or text "+SHOP.phone+".",
        order0:"My order is empty", order:function(n){return "My order: "+n+(n>1?" items":" item")}, total:"Total", orderHead:"Order", send:"Send by text", sendMail:"Send order by email", sendAuto:"Send order", sending:"Sending…", done:"Order sent. Thank you! We will confirm delivery.", fail:"Sending did not work. Try again, or use the email button.", each:"each", noPrice:"price to confirm", sent:"Tap Send in the app that opens. If nothing opens, use Copy and send the text to "+SHOP.phone+" or "+SHOP.email+".",
@@ -536,7 +559,7 @@ var T = {
        copyFail:"Copying did not work. Call or text "+SHOP.phone+" and tell us what you picked.",
        howTitle:"How to order", howText:"Log in with your member code, add your items and tap “Send order”. We will confirm delivery.",
        foot:"Independent accessories wholesaler. Connector names are used only to show compatibility. Not affiliated with any device maker.", hello:"Hello, here is my selection:" },
-  zh:{ hero:"选一款适合你的。", heroText:"面向合作店铺的数据线、充电头、耳机目录。登录后查看价格并下单。",
+  zh:{ srHint:"点一下视频可以开声音。", srTitle:"我们的货品展示", srText:"一起看看我们的货品。目录里没有的款式，也可以直接问我们。", srCap:["数据线","编织线","充电头","车载充电器"], srAsk:"目录里没有想要的款式？直接问我们", srSubj:"询问目录以外的款式", hero:"选一款适合你的。", heroText:"面向合作店铺的数据线、充电头、耳机目录。登录后查看价格并下单。",
        soon:"照片即将上传", sample:"示例", all:"全部", ear:"耳机", cable:"数据线", charger:"充电头", add:"加入", added:"已加入",
        ask:"价格：请联系我们", lockTxt:"会员可见价格", more:"查看详情", close:"关闭", ways:"四种接法", why:"为什么选这条线", spec:"规格参数", login:"会员登录", logout:"退出", mTitle:"会员登录", mText:"价格和在线订货仅对合作店铺开放。请输入会员码。", mLabel:"会员码", mGo:"登录", mBad:"会员码不正确，请检查后再试。", mJoin:"还不是合作店铺？请致电或发短信到 "+SHOP.phone+"。",
        order0:"订货单是空的", order:function(n){return "我的订货单："+n+" 件"}, total:"合计", orderHead:"订货单", send:"短信发送订单", sendMail:"邮件发送订单", sendAuto:"提交订单", sending:"正在发送…", done:"订单已发送，谢谢！我们会跟你确认送货。", fail:"发送没有成功。请再试一次，或使用邮件按钮。", each:"每件", noPrice:"价格待确认", sent:"请在打开的应用里点发送。如果没有打开，请点“复制”，把内容发到 "+SHOP.phone+" 或 "+SHOP.email+"。",
@@ -612,6 +635,12 @@ function render(){
   $("acct").textContent = PRICES ? MEMBER+" · "+t.logout : t.login; $("acct").className = PRICES ? "acct on" : "acct";
   $("mTitle").textContent=t.mTitle; $("mText").textContent=t.mText; $("mLabel").textContent=t.mLabel; $("mGo").textContent=t.mGo; $("mJoin").textContent=t.mJoin;
   $("heroTitle").textContent=t.hero; $("heroText").textContent=t.heroText;
+  $("srTitle").textContent=t.srTitle; $("srText").textContent=t.srText;
+  var sg=$("srGrid"); sg.textContent=""; $("srHint").textContent=t.srHint;
+  for(var rep=0;rep<2;rep++) for(var si=1;si<=4;si++){ var sc=el("div","sr-card"), sv=el("video"); sv.muted=true; sv.defaultMuted=true; sv.loop=true; sv.autoplay=true; sv.setAttribute("muted",""); sv.setAttribute("playsinline",""); sv.setAttribute("webkit-playsinline",""); sv.preload="metadata"; sv.poster="showroom-"+si+"-poster.jpg"; sv.src="showroom-"+si+".mp4"; var sh=el("h3"); sh.textContent=t.srCap[si-1]; var sb=el("div","snd","🔇"); sc.appendChild(sv); sc.appendChild(sb); sc.appendChild(sh); sg.appendChild(sc);
+    sc.addEventListener("click",(function(v,b){return function(){ var on=v.muted; document.querySelectorAll("#srGrid video").forEach(function(x){x.muted=true}); document.querySelectorAll("#srGrid .snd").forEach(function(x){x.textContent="🔇"}); if(on){v.muted=false; b.textContent="🔊"} }})(sv,sb)); }
+  if("IntersectionObserver" in window){ var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){var p=e.target.play(); if(p&&p.catch)p.catch(function(){})} else e.target.pause() })},{threshold:.15}); sg.querySelectorAll("video").forEach(function(v){io.observe(v)}); }
+  $("srAsk").textContent=t.srAsk; $("srAsk").href="mailto:"+SHOP.email+"?subject="+encodeURIComponent(t.srSubj);
   $("howTitle").textContent=t.howTitle; $("howText").textContent=t.howText;
   $("mail").textContent=SHOP.email; $("mail").href="mailto:"+SHOP.email; $("tel").textContent=SHOP.phone; $("tel").href="tel:"+SHOP.phone.replace(/\D/g,"");
   $("foot").textContent="© "+SHOP.name+". "+t.foot;
